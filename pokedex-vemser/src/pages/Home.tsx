@@ -15,6 +15,7 @@ const Home = (pokemon: any) => {
     getPokemons(dispatch);
     // console.log(pokemons);
   }, []);
+  console.log(pokemons);
 
   
   return (
@@ -37,11 +38,6 @@ const Home = (pokemon: any) => {
             </div>
           </li>
         ))}
-      
-      
-
-         
-        
       </ul>
     </div>
   );
