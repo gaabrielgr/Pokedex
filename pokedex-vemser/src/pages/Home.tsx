@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getPokemons } from "../store/actions/PokeAction";
 const Home = (pokemon: any) => {
   const { pokemons, dispatch } = pokemon;
+  console.log(pokemon);
 
   useEffect(() => {
     getPokemons(dispatch);
@@ -16,9 +17,9 @@ const Home = (pokemon: any) => {
             <div>
               <h3>{poke.name}</h3>
               <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
                   poke.url.split("/")[6]
-                }.png`}
+                }.svg`}
                 alt=""
               />
             </div>
