@@ -9,7 +9,7 @@ const Home = (pokemon: any) => {
   
 
   
-  console.log(pokemon.loading);
+  console.log(pokemons);
   
   useEffect(() => {
     GetPokemons(dispatch);
@@ -21,24 +21,31 @@ const Home = (pokemon: any) => {
     return ( <h1>Loading...</h1> )
   }
   
+  const upperCaseLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  //criar função para colocar zero a esquerda
+  const zeroLeft = (num: number) => {
+    return num < 10 ? `00${num}` : num < 100 ? `0${num}` : num;
+  };
   
   return (
       <ul> 
     
       {pokemons.map((poke: any) => (
             
-          <li key={poke.id}>
-              <ColorDiv color={poke.color.name}>
-              {/* primeira letra do nome do pokemon em maiuscula */}
-             
+          <li>
+              
               <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`}
-                alt=""
+                alt="imagem do pokemon"
               />
+              
+              <h1>{upperCaseLetter(poke.name)}</h1>
               {poke.name}
+              {zeroLeft(poke.id)}
 
-              {/* <p>{poke.data.color.name}</p> */}
-              </ColorDiv>
           </li>
             
         ))}
