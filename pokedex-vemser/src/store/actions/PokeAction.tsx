@@ -7,10 +7,14 @@ export const getPokemons = async (dispatch: any) => {
     pokemonsArray.push(`${idPokemons(i)}`);
   }
   try {
-    const {} = axios
+    await axios
       .all(pokemonsArray.map((pokemonGet) => axios.get(pokemonGet)))
       .then(
         axios.spread((...allData) => {
+          dispatch({
+            type: "SET_POKEMON",
+            pokemons: allData,
+          });
           console.log(allData);
         })
       );

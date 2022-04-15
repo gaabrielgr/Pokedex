@@ -13,15 +13,9 @@ const Home = (pokemon: any) => {
     <div>
       <ul>
         {pokemons.map((poke: any) => (
-          <li key={poke.url.split("/")[6]}>
+          <li key={poke.url}>
             <div>
               <h3>{poke.name}</h3>
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
-                  poke.url.split("/")[6]
-                }.svg`}
-                alt=""
-              />
             </div>
           </li>
         ))}
