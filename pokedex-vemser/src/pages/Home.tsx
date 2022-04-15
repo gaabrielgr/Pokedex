@@ -1,48 +1,53 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import api from "../api";
-import { getPokemons } from "../store/actions/PokeAction";
+import { GetPokemons } from "../store/actions/PokeAction";
 import { ColorDiv } from "./Home.styles";
 
 const Home = (pokemon: any) => {
   const { pokemons, dispatch } = pokemon;
   
-  console.log(pokemons.data);
-  
-  
-  
-  useEffect(() => {
-    getPokemons(dispatch);
-    // console.log(pokemons);
-  }, []);
-  console.log(pokemons);
 
   
+  console.log(pokemon.loading);
+  
+  useEffect(() => {
+    GetPokemons(dispatch);
+    console.log(pokemons.loading);
+    
+  }, []);
+  
+  if(pokemon.loading) {
+    return ( <h1>Loading...</h1> )
+  }
+  
+  
   return (
-    <div>
       <ul> 
     
       {pokemons.map((poke: any) => (
-          <li>
-            <div>
-              <ColorDiv color={poke.data.color.name}>
-
-              <h3>{poke.data.name}</h3>
+            
+          <li key={poke.id}>
+              <ColorDiv color={poke.color.name}>
+              {/* primeira letra do nome do pokemon em maiuscula */}
+             
               <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.data.id}.svg`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`}
                 alt=""
               />
-              
-              <p>{poke.data.color.name}</p>
+              {poke.name}
+
+              {/* <p>{poke.data.color.name}</p> */}
               </ColorDiv>
-            </div>
           </li>
+            
         ))}
       </ul>
-    </div>
   );
 };
 const mapStateToProps = (state: any) => ({
   pokemons: state.pokeReducer.pokemons,
+  loading: state.pokeReducer.loading,
 });
+
 export default connect(mapStateToProps)(Home);
