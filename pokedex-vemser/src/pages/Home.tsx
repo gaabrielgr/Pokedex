@@ -12,9 +12,7 @@ const Home = (pokemon: any) => {
   console.log(pokemons);
   
   useEffect(() => {
-    GetPokemons(dispatch);
-    console.log(pokemons.loading);
-    
+    GetPokemons(dispatch);    
   }, []);
   
   if(pokemon.loading) {
