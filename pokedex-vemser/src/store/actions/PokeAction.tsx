@@ -1,16 +1,31 @@
-import api from "../../api";
+import axios from "axios";
 
 export const getPokemons = async (dispatch: any) => {
-  try {
-    const { data } = await api.get("pokemon?limit=151&offset=0");
-    const { results }: any = data;
+  const idPokemons = (id: any) => `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+  const pokemonsArray = [];
+  
+  for (let i = 1; i <= 151; i++) {
+    pokemonsArray.push(`${idPokemons(i)}`);
+  }
 
-    const pokemon = {
-      type: "SET_POKEMON",
-      pokemons: results,
-    };
-    dispatch(pokemon);
+  try {
+    await axios
+      .all(pokemonsArray.map((pokemonGet) => axios.get(pokemonGet)))
+      .then(
+        axios.spread((...allData) => {
+          dispatch({
+            type: "SET_POKEMON",
+            pokemons: allData,
+          });
+        })
+      );
   } catch (error) {
     console.log(error);
   }
 };
+
+
+
+
+
+
