@@ -1,4 +1,3 @@
-import api from "../../api";
 import axios from "axios";
 export const getPokemons = async (dispatch: any) => {
   const idPokemons = (id: any) => `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -6,6 +5,7 @@ export const getPokemons = async (dispatch: any) => {
   for (let i = 1; i <= 151; i++) {
     pokemonsArray.push(`${idPokemons(i)}`);
   }
+
   try {
     await axios
       .all(pokemonsArray.map((pokemonGet) => axios.get(pokemonGet)))
@@ -15,7 +15,6 @@ export const getPokemons = async (dispatch: any) => {
             type: "SET_POKEMON",
             pokemons: allData,
           });
-          console.log(allData);
         })
       );
   } catch (error) {

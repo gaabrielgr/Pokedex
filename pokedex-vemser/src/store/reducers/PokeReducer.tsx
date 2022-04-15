@@ -1,5 +1,5 @@
 export const INITIAL_STATE = {
-  pokemons: [],
+  pokemons: {},
 };
 
 const pokeReducer = (state = INITIAL_STATE, action: any) => {

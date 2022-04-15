@@ -3,19 +3,24 @@ import { connect } from "react-redux";
 import { getPokemons } from "../store/actions/PokeAction";
 const Home = (pokemon: any) => {
   const { pokemons, dispatch } = pokemon;
-  console.log(pokemon);
-
+  const {} = pokemons;
   useEffect(() => {
     getPokemons(dispatch);
   }, []);
+  console.log(pokemons);
 
   return (
     <div>
       <ul>
         {pokemons.map((poke: any) => (
-          <li key={poke.url}>
+          <li>
             <div>
-              <h3>{poke.name}</h3>
+              <h3>{poke.data.name}</h3>
+              <img
+                src={poke.data.sprites.other.dream_world.front_default}
+                alt=""
+              />
+              <p>{poke.data.types[0].type.name}</p>
             </div>
           </li>
         ))}
