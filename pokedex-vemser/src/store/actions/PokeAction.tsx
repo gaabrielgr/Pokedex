@@ -29,27 +29,3 @@ export const GetPokemons = async (dispatch: any) => {
     console.log(error);
   }
 };
-
-// export const isLoading = (dispatch: any) => {
-//   const isLoading = {
-//     type: "IS_LOADING",
-//     loading: false,
-//   }
-
-//   dispatch(isLoading);
-
-// };
-
-/**
-  await Promise
-      .all(pokemonsArray.map((pokemonGet) => axios.get(pokemonGet)))
-      .then(
-        axios.spread((...allData) => {
-          dispatch({
-            type: "SET_POKEMON",
-            pokemons: allData,
-          });
-        })
-      ); 
- 
- */
