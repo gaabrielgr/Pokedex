@@ -10,20 +10,17 @@ import Height from '../../images/height.svg'
 import { CardImg } from "../Home.styles";
 import api from "../../api";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import Loading from "../../components/Loading";
 
 
 function Details(pokemon: any) {
     const { activePokemon, dispatch } = pokemon;
     const [ description, setDescription ] = useState('');
-    const limit = 200;
     const { id: idParams } = useParams();
     const navigate = useNavigate();
 
+    console.log(idParams);
     
-
-
-
-
 
     const getPokemonSpecies = async (id: string | undefined) => {
         try {
@@ -31,20 +28,24 @@ function Details(pokemon: any) {
 
             setDescription(data.flavor_text_entries[8].flavor_text);
             
-            
         } catch (error) {
             console.log(error);
             
         }
     }
-    
 
+    
+    
     useEffect(() => {
         GetPokemonByIdDetails(dispatch, idParams, navigate);
         getPokemonSpecies(idParams);
     }, []);
+    console.log(pokemon);
     console.log(description);
-
+    
+    // if(activePokemon.loading) {
+    //     return ( <Loading /> );
+    // }
     if (pokemon.loading) {
         return <h1>Loading...</h1>;
     }
@@ -161,7 +162,7 @@ function Details(pokemon: any) {
                                 </InfoNumbers>
 
                                 <div>
-                                    <ProgressBar abilities={activePokemon.stats[stat].base_stat} limit={limit} color={activePokemon.types[0].type.name} bgColor={activePokemon.types[0].type.name} />
+                                    <ProgressBar abilities={activePokemon.stats[stat].base_stat}  color={activePokemon.types[0].type.name} bgColor={activePokemon.types[0].type.name} />
                                 </div>
                             </Stats>
                         ))}
@@ -178,7 +179,7 @@ function Details(pokemon: any) {
 //trazer o active pokemon
 const mapStateToProps = (state: any) => ({
     activePokemon: state.pokeReducer.activePokemon,
-    loading: state.pokeReducer.loading,
+    loading: state.pokeReducer.loadingActivePokemon,
 });
 
 

@@ -1,10 +1,12 @@
 export const INITIAL_STATE = {
+  pokemons: [],
+  loading: true,
+  
+  typesPokemon: [],
+  listTypesPokemon: [],
 
   activePokemon: [],
-  pokemons: [],
-  loading: true
-  
-
+  loadingActivePokemon: true,
 };
 
 const pokeReducer = (state = INITIAL_STATE, action: any) => {
@@ -13,7 +15,14 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       ...state,
       pokemons: action.pokemons,
       loading: action.loading,
-     
+      typesPokemon: action.typesPokemon,
+    };
+  }
+  if (action.type === "SET_TYPES") {
+    return {
+      ...state,
+      loading: action.loading,
+      listTypesPokemon: action.listTypesPokemon,
     };
   }
 
@@ -21,11 +30,10 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
     return {
       ...state,
       activePokemon: action.pokemons,
-      loading: action.loading,
+      loadingActivePokemon: action.loadingActivePokemon,
     };
   }
 
-  
   return state;
 };
 
