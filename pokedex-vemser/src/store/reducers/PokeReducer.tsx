@@ -1,10 +1,8 @@
 export const INITIAL_STATE = {
-
-  activePokemon: [],
   pokemons: [],
-  loading: true
-  
-
+  loading: true,
+  typesPokemon: [],
+  listTypesPokemon: [],
 };
 
 const pokeReducer = (state = INITIAL_STATE, action: any) => {
@@ -13,19 +11,17 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       ...state,
       pokemons: action.pokemons,
       loading: action.loading,
-     
+      typesPokemon: action.typesPokemon,
     };
   }
-
-  if (action.type === "SET_ACTIVE_POKEMON") {
+  if (action.type === "SET_TYPES") {
     return {
       ...state,
-      activePokemon: action.pokemons,
       loading: action.loading,
+      listTypesPokemon: action.listTypesPokemon,
     };
   }
 
-  
   return state;
 };
 
