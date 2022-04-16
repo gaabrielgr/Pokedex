@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "../../api";
 
 
 export const GetPokemons = async (dispatch: any) => {
@@ -80,4 +81,35 @@ export const GetPokemonByIdDetails = async (dispatch: any, id: any, navigate: an
     console.log(error);
   }
 }
+
+
+
+export const GetPokemonsByType = async (dispatch: any, type: any, navigate: any) => {
+  const url = `https://pokeapi.co/api/v2/type/${type}`;
+
+  try {
+    const { data } = await axios.get(url);
+
+    const pokemonsArray = data.pokemon.map((pokemon: any) => pokemon.pokemon);
+
+    const pokemons = await Promise.all(
+      pokemonsArray.map(async (url: any) => {
+        const { data } = await axios.get(url.url);
+
+        return data;
+      })
+    );
+
+    const pokemonsDispatch = {
+      type: "SET_POKEMON",
+      pokemons: pokemons,
+      loading: false,
+    };
+
+    dispatch(pokemonsDispatch);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 

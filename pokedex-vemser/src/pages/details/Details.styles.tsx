@@ -54,7 +54,7 @@ export const ImgDiv = styled.div`
 `
 export const NamePokemon = styled.span`
     font-size: 24px;
-    color: white;
+    color: ${props => props.color};
     padding-left: 15px;
 `
 
@@ -65,4 +65,231 @@ export const ArrowName = styled.div `
 export const ArrowImg = styled.img`
     src: ${props => props.src};
     cursor: pointer;
+`
+
+export const PokemonStand = styled.div`
+    width: 1150px;
+    height: 730px;
+    background-color: #fff;
+    margin: 5px auto;
+    border-radius: 8px;
+    position: relative;
+    
+`
+
+export const PokemonImg = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -120px;
+`
+
+export const ImgStand = styled.img`
+    src: ${props => props.src}; 
+`
+
+export const PokemonTypes = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+export const Types = styled.div`
+    width: 90px;
+    height: 20px;
+    margin: 120px 15px 0;
+    border-radius: 10px;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    background-color: ${(props: any) => {
+    switch (props.color) {
+      case "steel":
+        return "#B7B7CE";
+      case "fire":
+        return "#EE8130";
+      case "grass":
+        return "#7AC74C";
+      case "electric":
+        return "#F7D02C";
+      case "water":
+        return "#6390F0";
+      case "ice":
+        return "#96D9D6";
+      case "ground":
+        return "#E2BF65";
+      case "rock":
+        return "#B6A136";
+      case "fairy":
+        return "#D685AD ";
+      case "poison":
+        return "#A33EA1";
+      case "dragon":
+        return "#6F35FC";
+      case "psychic":
+        return "#F95587";
+      case "normal":
+        return "#A8A77A";
+      case "bug":
+        return "#A6B91A";
+      case "ghost":
+        return "#735797";
+      case "fighting":
+        return "#C22E28";
+      case "flying":
+        return "#A98FF3";
+      default:
+        return "white";
+    }
+  }}
+
+`
+
+export const PokemonInfo = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`
+
+export const TitleInfo = styled.h2<{mT?: string, wT?: string, bR?: string}>`
+    font-size: 24px;
+    width: ${props => props.wT};
+    margin-top: ${props => props.mT};
+    border-right: ${props => props.bR};
+    color: ${(props: any) => {
+    switch (props.color) {
+      case "steel":
+        return "#B7B7CE";
+      case "fire":
+        return "#EE8130";
+      case "grass":
+        return "#7AC74C";
+      case "electric":
+        return "#F7D02C";
+      case "water":
+        return "#6390F0";
+      case "ice":
+        return "#96D9D6";
+      case "ground":
+        return "#E2BF65";
+      case "rock":
+        return "#B6A136";
+      case "fairy":
+        return "#D685AD ";
+      case "poison":
+        return "#A33EA1";
+      case "dragon":
+        return "#6F35FC";
+      case "psychic":
+        return "#F95587";
+      case "normal":
+        return "#A8A77A";
+      case "bug":
+        return "#A6B91A";
+      case "ghost":
+        return "#735797";
+      case "fighting":
+        return "#C22E28";
+      case "flying":
+        return "#A98FF3";
+      default:
+        return "white";
+    }
+  }}
+
+`
+
+export const Info = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-left: 1px solid #E0E0E0;
+    flex-direction: column;
+
+    :first-child {
+        border: none;
+    }
+
+    
+`
+
+export const InfoImg = styled.img`
+    width: 50px;
+    height: 50px;
+    src: ${props => props.src}
+`
+export const InfosPoke = styled.div`
+  width: 60%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 25px;
+`
+
+export const InfoAbilities = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%; 
+`
+export const AbilitySpan = styled.span`
+    margin-top: 5px;
+`
+
+export const InfoSpan = styled.span`
+    margin-left: 10px;
+    
+`
+
+export const TitleSpan = styled.h2`
+    font-size: 12px;
+    color: #666666;
+    margin-top: 20px;
+
+    
+
+`
+
+export const PokemonInfos = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+`
+export const Description = styled.div`
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 35px auto;
+`
+
+export const StatsBar = styled.div`
+    width: 100%;
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  `
+
+  export const Stats = styled.div`
+    width: 40%;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    
+    
+`
+
+export const InfoNumbers = styled.div`
+    width: 40px; 
 `
