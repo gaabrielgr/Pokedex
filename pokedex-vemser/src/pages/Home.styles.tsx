@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import beforePoke from "../images/beforePoke.png";
+
 /* import normalImg from "../images/.png";
 import fightingImg from "../images/.png";
 import flyingImg from "../images/.png";
@@ -34,6 +35,7 @@ export const ContainerCards = styled.ul`
 `;
 
 export const TitleType = styled.div`
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   grid-column-start: 1;
@@ -177,6 +179,7 @@ export const ContainerIdCard = styled.div`
   margin-right: 15px;
 `;
 export const IdCard = styled.p`
+  padding-top: 10px;
   text-align: right;
   font-weight: bold;
   color: ${(props: any) => {
@@ -231,6 +234,33 @@ export const ContainerNamePokemon = styled.div`
 
 export const ContainerSearch = styled.div`
   border-right: 1px solid #fff;
+  position: relative;
+`;
+
+export const SearchPokemon = styled.input`
+  width: 100%;
+  border: none;
+  padding-left: 10px;
+  font-size: 20px;
+  height: 35px;
+  outline: none;
+`;
+export const SearchImg = styled.img`
+  position: absolute;
+  top: 48px;
+  right: 5px;
+  opacity: 0.4;
+`;
+
+export const ButtonHome = styled.button`
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  :hover {
+    background-color: #dfdfdf;
+  }
 `;
 
 export const ContainerMenuLateral = styled.nav`
@@ -239,20 +269,28 @@ export const ContainerMenuLateral = styled.nav`
 `;
 
 export const UlMenuLateral = styled.ul`
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
+  border-right: 2px solid #fff;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
 `;
-
+export const ContainerTitleMenuLateral = styled.div`
+  padding-left: 10px;
+  padding-bottom: 5px;
+  margin-top: 20px;
+  border-bottom: 2px solid #fff;
+`;
 export const LiMenuLateral = styled.li`
   display: flex;
+  border-bottom: 2px solid #fff;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   height: 50px;
   position: relative;
+  img {
+    margin-left: 10px;
+    opacity: 0.5;
+  }
   :hover {
     background-color: #dfdfdf;
   }
@@ -263,7 +301,8 @@ export const LiMenuLateral = styled.li`
   }
 `;
 export const ItemMenu = styled.p`
-  padding-left: 15px;
+  padding-left: 5px;
+  text-transform: capitalize;
   font-size: 18px;
   display: flex;
   align-items: center;

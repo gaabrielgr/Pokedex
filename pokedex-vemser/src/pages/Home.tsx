@@ -28,11 +28,15 @@ import {
   ContainerSearch,
   Footer,
   TitleType,
+  ContainerTitleMenuLateral,
+  SearchPokemon,
+  ButtonHome,
+  SearchImg,
 } from "./Home.styles";
 import { Link } from "react-router-dom";
-
+import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
-
+import gpsPoke from "../images/gps.png";
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
   const { pokemons, dispatch, typesPokemon, listTypesPokemon } = pokemon;
@@ -54,9 +58,7 @@ const Home = (pokemon: any) => {
 
   useEffect(() => {
     GetPokemons(dispatch);
-    if(listTypesPokemon) {
-      // isLoading(dispatch)
-
+    if (listTypesPokemon) {
     }
   }, []);
 
@@ -102,17 +104,24 @@ const Home = (pokemon: any) => {
     <ContainerHome>
       <ContainerMenuLateral>
         <ContainerSearch>
-          <button onClick={() => setHandleType(false)}>HOME</button>
+          <ButtonHome onClick={() => setHandleType(false)}>HOME</ButtonHome>
           <form onSubmit={findPokemon}>
-            <input
+            <SearchPokemon
               type="text"
+              placeholder="Pesquise seu pokemon..."
               onChange={(e) => setHandleInput(e.target.value)}
             />
           </form>
+          <SearchImg src={searchImg} alt="" width={"20px"} height={"20px"} />
         </ContainerSearch>
         <UlMenuLateral>
+          <ContainerTitleMenuLateral>
+            <h1>Menu Types Pokemons</h1>
+          </ContainerTitleMenuLateral>
+
           {filterArr(results).map((type: any) => (
             <LiMenuLateral>
+              <img src={gpsPoke} alt="" width={"16px"} height={"16px"} />
               <ItemMenu>
                 <ItemMenuLink
                   onClick={() => listPokeMenu(dispatch, type.name, pokemons)}
@@ -132,7 +141,7 @@ const Home = (pokemon: any) => {
           </TitleType>
         ) : (
           <TitleType>
-            <h1>ALL Pokes 1°Geração</h1>
+            <h1>ALL Pokemons 1°Generation</h1>
           </TitleType>
         )}
         {handleType
