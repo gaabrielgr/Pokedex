@@ -44,10 +44,7 @@ const Home = (pokemon: any) => {
   const [handleSearch, setHandleSearch] = useState(false);
   const [typeName, setTypeName] = useState("");
 
-  
 
-
-  
   console.log(results);
   
   const filterArr = (arr: any) => {
@@ -65,9 +62,6 @@ const Home = (pokemon: any) => {
     
     console.log(pokemon);
 
-  
-
-  
 
   if (pokemon.loading) {
     return <Loading />;
