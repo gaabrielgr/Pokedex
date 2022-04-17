@@ -1,14 +1,9 @@
-/* @font-face {
-  src: url(./components/fontFamily/PokemonHollow.ttf);
-  font-family: "Pokemon Solid";
-  font-weight: normal;
-} */
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   list-style: none;
-  font-family: "Pokemon Solid", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 html {
   scroll-behavior: smooth;

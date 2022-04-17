@@ -50,15 +50,14 @@ function Details(pokemon: any) {
 
   const getPokemonSpecies = async (id: string | undefined) => {
     try {
-      const  response  = await api.get(`pokemon-species/${id}`);
-        const {data} = response
+      const response = await api.get(`pokemon-species/${id}`);
+      const { data } = response;
       setDescription(data.flavor_text_entries[8].flavor_text);
-        if(response.status === 404) {
-            console.log('entrei');
-            
-            navigate('/')
-        }
+      if (response.status === 404) {
+        console.log("entrei");
 
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +66,7 @@ function Details(pokemon: any) {
   useEffect(() => {
     GetPokemonByIdDetails(dispatch, idParams, navigate);
     getPokemonSpecies(idParams);
-    Aos.init({duration: 2000})
+    Aos.init({ duration: 950 });
   }, []);
 
   if (pokemon.loading) {
