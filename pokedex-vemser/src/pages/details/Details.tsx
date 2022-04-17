@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { GetPokemonByIdDetails } from "../../store/actions/PokeAction";
+import { GetPokemonById } from "../../store/actions/PokeAction";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   AbilitySpan,
@@ -39,6 +39,7 @@ import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Loading from "../../components/Loading";
+import Error from "../../components/error/Error";
 
 function Details(pokemon: any) {
   const { activePokemon, dispatch } = pokemon;
@@ -51,24 +52,28 @@ function Details(pokemon: any) {
       const response = await api.get(`pokemon-species/${id}`);
       const { data } = response;
       setDescription(data.flavor_text_entries[8].flavor_text);
-      if (response.status === 404) {
-        console.log("entrei");
-
-        navigate("/");
-      }
+      
     } catch (error) {
       console.log(error);
     }
   };
 
+  console.log(pokemon);
+
+  
+
   useEffect(() => {
-    GetPokemonByIdDetails(dispatch, idParams, navigate);
+    GetPokemonById(dispatch, idParams);
     getPokemonSpecies(idParams);
     Aos.init({ duration: 950 });
   }, []);
 
   if (pokemon.loading) {
     return <Loading />;
+  }
+
+  if(pokemon.error) {
+    return <Error />
   }
 
   const upperCaseLetter = (str: string) => {
@@ -212,6 +217,7 @@ function Details(pokemon: any) {
 const mapStateToProps = (state: any) => ({
   activePokemon: state.pokeReducer.activePokemon,
   loading: state.pokeReducer.loadingActivePokemon,
+  error: state.pokeReducer.errorActivePokemon,
 });
 
 export default connect(mapStateToProps)(Details);
