@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import arrowTopPage from "../images/arrowTopScrollMed.png";
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
+import Notiflix from "notiflix";
 import {
   GetPokemonById,
   getPokemonByType,
@@ -72,13 +73,15 @@ const Home = (pokemon: any) => {
     let find = pokemons.find(
       (pokemon: any) => pokemon.name === handleInput.toLowerCase()
     );
-    console.log(find);
 
     setHandleSearch(true);
     if (find) {
       navigate(`/details/${find.id}`);
     } else {
-      alert("não existe");
+      Notiflix.Notify.failure("Pokemon não encontrado!", {
+        timeout: 1000,
+        position: "center-top",
+      });
     }
   };
 
