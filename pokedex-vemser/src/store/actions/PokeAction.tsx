@@ -1,8 +1,12 @@
 import axios from "axios";
 import api from "../../api";
+
+
+
+
 export const GetPokemons = async (dispatch: any) => {
   const idPokemons = (id: any) => `https://pokeapi.co/api/v2/pokemon/${id}`;
-
+  
   const pokemonsArray = [];
   for (let i = 1; i <= 151; i++) {
     pokemonsArray.push(`${idPokemons(i)}`);
@@ -65,6 +69,8 @@ export const getPokemonByType = async (
         loading: false,
       };
       dispatch(pokemonsList);
+      console.log(pokemonsList);
+      
     } catch (error) {
       console.log(error);
     }
@@ -136,11 +142,14 @@ export const GetPokemonById = async (dispatch: any, id: any) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
 
   try {
-    const { data } = await axios.get(url);
+    const  response  = await axios.get(url);
+
+    console.log(response);
+    
 
     const pokemonDispatch = {
       type: "SET_ACTIVE_POKEMON",
-      pokemons: data,
+      pokemons: response.data,
       loadingActivePokemon: false,
     };
 
@@ -155,34 +164,28 @@ export const GetPokemonById = async (dispatch: any, id: any) => {
 }
 
 
-/**
- * export const GetPokemonByIdDetails = async (
-  dispatch: any,
-  id: any,
-  navigate: any
-) => {
-  try {
-    const { data } = await api.get(`/pokemon/${id}`);
+export const GetPokemonByName = async(dispatch: any, inputValue: any, listPokemon: any, setName: any) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${inputValue}`;
 
+
+  try {
+    const  {data}  = await axios.get(url);
+
+    
     const pokemonDispatch = {
-      type: "SET_ACTIVE_POKEMON",
-      pokemons: data,
+      type: "SET_TYPES",
+      listTypesPokemon: data,
       loading: false,
     };
 
-    if (id > 151) {
-      navigate("/");
-    }
 
     dispatch(pokemonDispatch);
     console.log(pokemonDispatch);
     
+    
+    
+
   } catch (error) {
     console.log(error);
   }
-};
- * 
- * 
- * 
- */
-
+}

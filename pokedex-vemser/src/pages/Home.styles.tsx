@@ -210,7 +210,8 @@ export const UlMenuLateral = styled.ul`
 
 export const LiMenuLateral = styled.li`
   display: flex;
-  align-items: end;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   height: 50px;
   position: relative;
@@ -230,9 +231,13 @@ export const ItemMenu = styled.p`
   align-items: center;
   height: 100%;
   width: 100%;
+
 `;
 export const ItemMenuLink = styled.a`
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 `;
 
 export const Footer = styled.footer`

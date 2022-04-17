@@ -34,4 +34,5 @@ code {
 button {
   border: none;
   background-color: none;
+  cursor: pointer;
 }

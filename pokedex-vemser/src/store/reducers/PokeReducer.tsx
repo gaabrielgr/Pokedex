@@ -1,9 +1,11 @@
 export const INITIAL_STATE = {
   pokemons: [],
   loading: true,
-  
+
   typesPokemon: [],
+
   listTypesPokemon: [],
+  loadingTypesPokemon: true,
 
   activePokemon: [],
   loadingActivePokemon: true,
@@ -21,7 +23,7 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
   if (action.type === "SET_TYPES") {
     return {
       ...state,
-      loading: action.loading,
+      loadingTypesPokemon: action.loadingTypesPokemon,
       listTypesPokemon: action.listTypesPokemon,
     };
   }
