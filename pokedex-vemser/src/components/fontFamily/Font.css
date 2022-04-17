@@ -1,8 +1,0 @@
-@font-face {
-  src: url(PokemonSolid.ttf);
-  font-family: "Pokemon Solid";
-  font-weight: normal;
-}
-html {
-  font-family: "Pokemon Solid";
-}
