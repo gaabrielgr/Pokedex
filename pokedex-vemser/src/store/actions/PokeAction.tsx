@@ -203,3 +203,5 @@ export const isLoading = (dispatch: any) => {
 
   dispatch(pokemonsDispatch);
 }
+
+

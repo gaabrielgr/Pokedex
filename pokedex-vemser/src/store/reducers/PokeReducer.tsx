@@ -9,6 +9,7 @@ export const INITIAL_STATE = {
 
   activePokemon: [],
   loadingActivePokemon: true,
+
 };
 
 const pokeReducer = (state = INITIAL_STATE, action: any) => {
@@ -42,6 +43,7 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       loadingTypesPokemon: action.loadingTypesPokemon,
     };
   }
+
 
   return state;
 };
