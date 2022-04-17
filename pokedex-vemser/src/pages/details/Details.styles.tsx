@@ -1,10 +1,13 @@
 import styled from "styled-components";
-
 export const ContainerPai = styled.div`
-    width: 100%;
-    height: 100vh;
-
-    background-color: ${(props: any) => {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding-top: 40px;
+  height: 100vh;
+  background-color: ${(props: any) => {
     switch (props.color) {
       case "steel":
         return "#f4f4f4";
@@ -42,71 +45,85 @@ export const ContainerPai = styled.div`
         return "white";
     }
   }};
-`
+`;
 
 export const ImgDiv = styled.div`
-    width: 95%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 15px;
-
-`
+  position: absolute;
+  top: 1px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-top: 15px;
+`;
 export const NamePokemon = styled.span`
-    font-size: 24px;
-    color: ${props => props.color};
-    padding-left: 15px;
-`
+  font-size: 24px;
+  color: ${(props) => props.color};
+  padding: 0px 15px;
+  color: #fff;
+`;
 
-export const ArrowName = styled.div `
-    display: flex;
-    padding-left: 15px;
-`
+export const ArrowName = styled.div`
+  display: flex;
+  padding-left: 15px;
+`;
 export const ArrowImg = styled.img`
-    src: ${props => props.src};
-    cursor: pointer;
-`
+  src: ${(props) => props.src};
+  cursor: pointer;
+`;
+export const ReturnDetails = styled.a`
+  cursor: pointer;
+`;
 
 export const PokemonStand = styled.div`
-    width: 1150px;
-    height: 730px;
-    background-color: #fff;
-    margin: 5px auto;
-    border-radius: 8px;
-    position: relative;
-    
-`
-
+  width: 1150px;
+  background-color: #fff;
+  margin: 5px auto;
+  border-radius: 8px;
+  position: relative;
+`;
+export const PokeCard = styled.img<{
+  right?: string;
+  left?: string;
+  top?: string;
+  bottom?: string;
+}>`
+  width: 150px;
+  position: absolute;
+  opacity: 0.1;
+  top: ${(props) => props.top};
+  right: ${(props) => props.right};
+  bottom: ${(props) => props.bottom};
+  left: ${(props) => props.left};
+`;
 export const PokemonImg = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: -120px;
-`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const ImgStand = styled.img`
-    src: ${props => props.src}; 
-`
+  margin-top: -100px;
+  src: ${(props) => props.src};
+`;
 
 export const PokemonTypes = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Types = styled.div`
-    width: 90px;
-    height: 20px;
-    margin: 120px 15px 0;
-    border-radius: 10px;
-    display: flex;
-    color: white;
-    align-items: center;
-    justify-content: center;
-    background-color: ${(props: any) => {
+  width: 90px;
+  height: 20px;
+  margin: 30px 15px 0;
+  border-radius: 10px;
+  display: flex;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props: any) => {
     switch (props.color) {
       case "steel":
         return "#B7B7CE";
@@ -145,22 +162,21 @@ export const Types = styled.div`
       default:
         return "white";
     }
-  }}
-
-`
+  }};
+`;
 
 export const PokemonInfo = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
 
-export const TitleInfo = styled.h2<{mT?: string, wT?: string, bR?: string}>`
-    font-size: 24px;
-    width: ${props => props.wT};
-    margin-top: ${props => props.mT};
-    border-right: ${props => props.bR};
-    color: ${(props: any) => {
+export const TitleInfo = styled.h2<{ mT?: string; wT?: string; bR?: string }>`
+  font-size: 24px;
+  width: ${(props) => props.wT};
+  margin-top: ${(props) => props.mT};
+  border-right: ${(props) => props.bR};
+  color: ${(props: any) => {
     switch (props.color) {
       case "steel":
         return "#B7B7CE";
@@ -199,97 +215,85 @@ export const TitleInfo = styled.h2<{mT?: string, wT?: string, bR?: string}>`
       default:
         return "white";
     }
-  }}
-
-`
+  }};
+`;
 
 export const Info = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    border-left: 1px solid #E0E0E0;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  border-left: 1px solid #e0e0e0;
+  flex-direction: column;
 
-    :first-child {
-        border: none;
-    }
-
-    
-`
+  :first-child {
+    border: none;
+  }
+`;
 
 export const InfoImg = styled.img`
-    width: 50px;
-    height: 50px;
-    src: ${props => props.src}
-`
+  width: 50px;
+  height: 50px;
+  src: ${(props) => props.src};
+`;
 export const InfosPoke = styled.div`
-  width: 60%;
   display: flex;
-  margin: 0 auto;
   margin-top: 25px;
-`
+`;
 
 export const InfoAbilities = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 80%; 
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+`;
 export const AbilitySpan = styled.span`
-    margin-top: 5px;
-`
+  margin-top: 5px;
+`;
 
 export const InfoSpan = styled.span`
-    margin-left: 10px;
-    
-`
+  margin-left: 10px;
+`;
 
 export const TitleSpan = styled.h2`
-    font-size: 12px;
-    color: #666666;
-    margin-top: 20px;
-
-    
-
-`
+  font-size: 12px;
+  color: #666666;
+  margin-top: 20px;
+`;
 
 export const PokemonInfos = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-
-`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export const Description = styled.div`
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 35px auto;
-`
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px auto;
+`;
 
 export const StatsBar = styled.div`
-    width: 100%;
-    display: flex;
-    margin-top: 30px;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  `
+  width: 100%;
+  display: flex;
+  margin-top: 10px;
+  padding-bottom: 30px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-  export const Stats = styled.div`
-    width: 40%;
-    display: flex;
-    margin: 0 auto;
-    align-items: center;
-    justify-content: space-between;
-    
-    
-`
+export const Stats = styled.div`
+  width: 40%;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export const InfoNumbers = styled.div`
-    width: 40px; 
-`
+  width: 40px;
+`;
