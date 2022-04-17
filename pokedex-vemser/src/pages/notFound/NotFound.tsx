@@ -1,8 +1,10 @@
+import NotFoundGif from '../../images/notFound.gif';
+import { NotFoundStyles } from './NotFound.styles';
+
 function NotFound() {
   return (
-    <div>
-        
-    </div>
+    <NotFoundStyles src={NotFoundGif}>
+    </NotFoundStyles>
   )
 }
 export default NotFound

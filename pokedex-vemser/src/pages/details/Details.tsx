@@ -67,7 +67,7 @@ function Details(pokemon: any) {
   useEffect(() => {
     GetPokemonByIdDetails(dispatch, idParams, navigate);
     getPokemonSpecies(idParams);
-    Aos.init({duration: 2000})
+    Aos.init({duration: 890})
   }, []);
 
   if (pokemon.loading) {
