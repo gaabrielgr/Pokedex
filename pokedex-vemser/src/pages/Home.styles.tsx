@@ -1,5 +1,23 @@
 import styled from "styled-components";
 import beforePoke from "../images/beforePoke.png";
+/* import normalImg from "../images/.png";
+import fightingImg from "../images/.png";
+import flyingImg from "../images/.png";
+import PoisonImg from "../images/.png";
+import groundImg from "../images/.png";
+import rockImg from "../images/.png";
+import bugImg from "../images/.png";
+import ghostImg from "../images/.png";
+import stellImg from "../images/.png";
+import fireImg from "../images/.png";
+import waterImg from "../images/.png";
+import grassImg from "../images/.png";
+import eletricImg from "../images/.png";
+import psychicImg from "../images/.png";
+import iceImg from "../images/.png";
+import dragonImg from "../images/.png";
+import fairyImg from "../images/.png";
+import { url } from "inspector"; */
 export const ContainerHome = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
@@ -9,10 +27,17 @@ export const ContainerHome = styled.div`
 export const ContainerCards = styled.ul`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 100px 1fr 1fr 1fr 1fr 1fr;
   gap: 20px;
   margin-top: 20px;
   margin-right: 20px;
+`;
+
+export const TitleType = styled.div`
+  display: flex;
+  align-items: center;
+  grid-column-start: 1;
+  grid-column-end: 4;
 `;
 
 export const Card = styled.li`
@@ -21,6 +46,7 @@ export const Card = styled.li`
   flex-direction: column;
   justify-content: space-between;
   height: 250px;
+
   border: 2px solid;
   border-radius: 8px;
   border-color: ${(props: any) => {
@@ -62,7 +88,18 @@ export const Card = styled.li`
     }
   }};
 `;
+export const BackgroundCardImg = styled.div`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  opacity: 0.1;
+  img {
+    margin-left: 30px;
+  }
+`;
+
 export const ContainerCardImg = styled.div`
+  z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -188,6 +225,7 @@ export const ContainerNamePokemon = styled.div`
   align-items: center;
   width: 100%;
   height: 40px;
+  z-index: 99;
 `;
 /* MENU LATERAL */
 
@@ -231,7 +269,6 @@ export const ItemMenu = styled.p`
   align-items: center;
   height: 100%;
   width: 100%;
-
 `;
 export const ItemMenuLink = styled.a`
   width: 100%;
@@ -252,3 +289,45 @@ export const Footer = styled.footer`
     cursor: pointer;
   }
 `;
+
+/* export const ImgMenu = styled.img.attrs({
+src: url
+${(props: any) => {
+  switch (props.source) {
+    case "steel":
+      return `${stellImg}`;
+    case "fire":
+      return "#EE8130";
+    case "grass":
+      return "#7AC74C";
+    case "electric":
+      return "#F7D02C";
+    case "water":
+      return "#6390F0";
+    case "ice":
+      return "#96D9D6";
+    case "ground":
+      return "#E2BF65";
+    case "rock":
+      return "#B6A136";
+    case "fairy":
+      return "#D685AD ";
+    case "poison":
+      return "#A33EA1";
+    case "dragon":
+      return "#6F35FC";
+    case "psychic":
+      return "#F95587";
+    case "normal":
+      return "#A8A77A";
+    case "bug":
+      return "#A6B91A";
+    case "ghost":
+      return "#735797";
+    case "fighting":
+      return "#C22E28";
+    default:
+      return "white";
+  }
+}};
+}) */
