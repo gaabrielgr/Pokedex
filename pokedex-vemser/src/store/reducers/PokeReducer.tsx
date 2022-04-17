@@ -36,6 +36,13 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
     };
   }
 
+  if(action.type === "IS_LOADING_TYPES") {
+    return {
+      ...state,
+      loadingTypesPokemon: action.loadingTypesPokemon,
+    };
+  }
+
   return state;
 };
 

@@ -36,6 +36,8 @@ import Weight from "../../images/weight.svg";
 import Height from "../../images/height.svg";
 import api from "../../api";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import Loading from "../../components/Loading";
 
 function Details(pokemon: any) {
@@ -48,9 +50,15 @@ function Details(pokemon: any) {
 
   const getPokemonSpecies = async (id: string | undefined) => {
     try {
-      const { data }: any = await api.get(`pokemon-species/${id}`);
-
+      const  response  = await api.get(`pokemon-species/${id}`);
+        const {data} = response
       setDescription(data.flavor_text_entries[8].flavor_text);
+        if(response.status === 404) {
+            console.log('entrei');
+            
+            navigate('/')
+        }
+
     } catch (error) {
       console.log(error);
     }
@@ -59,10 +67,11 @@ function Details(pokemon: any) {
   useEffect(() => {
     GetPokemonByIdDetails(dispatch, idParams, navigate);
     getPokemonSpecies(idParams);
+    Aos.init({duration: 2000})
   }, []);
 
   if (pokemon.loading) {
-    return <h1>Loading...</h1>;
+    return <Loading />;
   }
 
   const upperCaseLetter = (str: string) => {
@@ -108,7 +117,7 @@ function Details(pokemon: any) {
           </ArrowName>
           <NamePokemon>#{zeroLeft(activePokemon.id)}</NamePokemon>
         </ImgDiv>
-        <PokemonStand>
+        <PokemonStand data-aos="fade-up">
           <PokeCard src={pokeCard} alt="" top="1px" />
           <PokeCard src={pokeCard} alt="" right="1px" />
           <PokeCard src={pokeCard} alt="" bottom="1px" />
@@ -203,7 +212,6 @@ function Details(pokemon: any) {
   );
 }
 
-//trazer o active pokemon
 const mapStateToProps = (state: any) => ({
   activePokemon: state.pokeReducer.activePokemon,
   loading: state.pokeReducer.loadingActivePokemon,

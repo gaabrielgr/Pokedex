@@ -63,14 +63,14 @@ export const getPokemonByType = async (
           return data;
         })
       );
+      
       const pokemonsList = {
         type: "SET_TYPES",
         listTypesPokemon: listMenuPoke,
-        loading: false,
+        loadingTypesPokemon: false,
       };
       dispatch(pokemonsList);
-      console.log(pokemonsList);
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -85,17 +85,14 @@ export const getPokemonByType = async (
 
 
 export const GetPokemonsByType = async (dispatch: any, type: any, navigate: any) => {
-  const url = `https://pokeapi.co/api/v2/type/${type}`;
-
   try {
-    const { data } = await axios.get(url);
+    const { data } = await api.get(`type/${type}`);
 
     const pokemonsArray = data.pokemon.map((pokemon: any) => pokemon.pokemon);
 
     const pokemons = await Promise.all(
       pokemonsArray.map(async (url: any) => {
         const { data } = await axios.get(url.url);
-
         return data;
       })
     );
@@ -114,26 +111,33 @@ export const GetPokemonsByType = async (dispatch: any, type: any, navigate: any)
 
 
 export const GetPokemonByIdDetails = async (dispatch: any, id: any, navigate: any) => {
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+ 
 
   try {
-    const { data } = await axios.get(url);
+    const  response  = await api.get(`pokemon/${id}`);
 
     const pokemonDispatch = {
       type: "SET_ACTIVE_POKEMON",
-      pokemons: data,
+      pokemons: response.data,
       loadingActivePokemon: false,
     };
 
+     
     if(id > 151){
       navigate("/");
     }
-
+    
     dispatch(pokemonDispatch);
     
-
+    
+    console.log(response.status);
+    
+    
   } catch (error) {
     console.log(error);
+    if(error){      
+      navigate('/');
+    }
   }
 }
 
@@ -175,7 +179,7 @@ export const GetPokemonByName = async(dispatch: any, inputValue: any, listPokemo
     const pokemonDispatch = {
       type: "SET_TYPES",
       listTypesPokemon: data,
-      loading: false,
+      loadingTypesPokemon: false,
     };
 
 
@@ -188,4 +192,14 @@ export const GetPokemonByName = async(dispatch: any, inputValue: any, listPokemo
   } catch (error) {
     console.log(error);
   }
+}
+
+
+export const isLoading = (dispatch: any) => {
+  const pokemonsDispatch = {
+    type: "IS_LOADING_TYPES",
+    loadingTypesPokemon: false,
+  };
+
+  dispatch(pokemonsDispatch);
 }

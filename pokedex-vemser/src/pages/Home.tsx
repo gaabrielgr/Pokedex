@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import arrowTopPage from "../images/arrowTopScrollMed.png";
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
-import { GetPokemonById, GetPokemonByIdDetails, GetPokemonByName, getPokemonByType, GetPokemons } from "../store/actions/PokeAction";
+import { GetPokemonById, GetPokemonByIdDetails, GetPokemonByName, getPokemonByType, GetPokemons, isLoading } from "../store/actions/PokeAction";
 import {
   ColorCard,
   IdCard,
@@ -35,6 +35,8 @@ const Home = (pokemon: any) => {
   const [ typeName, setTypeName ] = useState('');
   console.log(results);
   
+  console.log(pokemon);
+  
 
   const filterArr = (arr: any) => {
     return arr.filter((item: any) => item.name !== 'unknown' && item.name !== 'dark' && item.name !== 'shadow')
@@ -42,6 +44,10 @@ const Home = (pokemon: any) => {
   
   useEffect(() => {
     GetPokemons(dispatch);
+    if(listTypesPokemon) {
+      // isLoading(dispatch)
+
+    }
   }, []);
 
   
@@ -49,7 +55,7 @@ const Home = (pokemon: any) => {
     return <Loading />;
   }
 
-
+  
   console.log(pokemons);
   const findPokemon = (e: any) => {
     e.preventDefault()
@@ -90,7 +96,6 @@ const Home = (pokemon: any) => {
         <ContainerSearch>
           <button onClick={() => setHandleType(false)}>HOME</button>
         <form onSubmit={findPokemon}>
-          {/* <button type="button" onClick={() => findPokemon(handleInput)}>Buscar</button> */}
           <input type="text" onChange={(e) => setHandleInput(e.target.value)} />  
         </form>
         </ContainerSearch>
@@ -102,7 +107,6 @@ const Home = (pokemon: any) => {
                   onClick={() => listPokeMenu(dispatch, type.name, pokemons)}
                 >
                   {type.name}
-                  {/* {setTypeName(type.name)} */}
                 </ItemMenuLink>
               </ItemMenu>
             </LiMenuLateral>
@@ -111,9 +115,9 @@ const Home = (pokemon: any) => {
       </ContainerMenuLateral>
       <ContainerCards>
         {handleType && ( <h1>{typeName}</h1>)}
+        {pokemon.LoadingTypesPokemon && ( <Loading />)}
         {handleType
-          ? 
-          listTypesPokemon.map((poke: any) => (
+          ? listTypesPokemon.map((poke: any) => (
             <Link to={`/details/${poke.id}`}  onClick={() => GetPokemonById(dispatch, poke.id)}>
               
             <Card key={poke.id} color={poke.types[0].type.name}>   
@@ -177,6 +181,7 @@ const mapStateToProps = (state: any) => ({
   loading: state.pokeReducer.loading,
   typesPokemon: state.pokeReducer.typesPokemon,
   listTypesPokemon: state.pokeReducer.listTypesPokemon,
+  loadingTypesPokemon: state.pokeReducer.loadingTypesPokemon,
 });
 
 export default connect(mapStateToProps)(Home);
