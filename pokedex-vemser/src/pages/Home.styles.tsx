@@ -318,14 +318,22 @@ export const ItemMenuLink = styled.a`
 
 export const Footer = styled.footer`
   margin-top: 20px;
-  padding: 0px 20px;
+  color: #a7a7a7;
+  border-top: 2px solid #fff;
+  padding: 0px 20px 3px 20px;
   grid-column-start: 1;
   grid-column-end: 4;
   height: 50px;
   display: flex;
   justify-content: space-between;
+  align-items: end;
+  p {
+    width: 100%;
+    text-align: center;
+  }
   a {
     cursor: pointer;
+    padding-bottom: 0px;
   }
 `;
 

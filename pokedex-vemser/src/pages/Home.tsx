@@ -46,7 +46,6 @@ const Home = (pokemon: any) => {
   const [handleInput, setHandleInput] = useState("");
   const [handleSearch, setHandleSearch] = useState(false);
   const [typeName, setTypeName] = useState("");
-  console.log(results);
 
   const filterArr = (arr: any) => {
     return arr.filter(
@@ -67,7 +66,6 @@ const Home = (pokemon: any) => {
     return <Loading />;
   }
 
-  console.log(pokemons);
   const findPokemon = (e: any) => {
     e.preventDefault();
     let find = pokemons.find(
@@ -206,7 +204,10 @@ const Home = (pokemon: any) => {
             ))}
       </ContainerCards>
       <Footer>
-        <p> Projeto realizado no VemSer DBC</p>
+        <p>
+          Projeto realizado no VemSer 2022 DBC-Company - Gabriel Gomes e Rafael
+          Santini
+        </p>
         <a
           onClick={() => {
             topPage();

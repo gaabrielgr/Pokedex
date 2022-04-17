@@ -46,8 +46,6 @@ function Details(pokemon: any) {
   const { id: idParams } = useParams();
   const navigate = useNavigate();
 
-  console.log(idParams);
-
   const getPokemonSpecies = async (id: string | undefined) => {
     try {
       const response = await api.get(`pokemon-species/${id}`);
