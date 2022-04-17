@@ -1,12 +1,8 @@
 import axios from "axios";
 import api from "../../api";
-
-
-
-
 export const GetPokemons = async (dispatch: any) => {
   const idPokemons = (id: any) => `https://pokeapi.co/api/v2/pokemon/${id}`;
-  
+
   const pokemonsArray = [];
   for (let i = 1; i <= 151; i++) {
     pokemonsArray.push(`${idPokemons(i)}`);
@@ -63,14 +59,13 @@ export const getPokemonByType = async (
           return data;
         })
       );
-      
+
       const pokemonsList = {
         type: "SET_TYPES",
         listTypesPokemon: listMenuPoke,
         loadingTypesPokemon: false,
       };
       dispatch(pokemonsList);
-
     } catch (error) {
       console.log(error);
     }
@@ -78,18 +73,14 @@ export const getPokemonByType = async (
     console.log(error);
   }
 };
-
-
-
-
-
-
-export const GetPokemonsByType = async (dispatch: any, type: any, navigate: any) => {
+export const GetPokemonsByType = async (
+  dispatch: any,
+  type: any,
+  navigate: any
+) => {
   try {
     const { data } = await api.get(`type/${type}`);
-
     const pokemonsArray = data.pokemon.map((pokemon: any) => pokemon.pokemon);
-
     const pokemons = await Promise.all(
       pokemonsArray.map(async (url: any) => {
         const { data } = await axios.get(url.url);
@@ -108,100 +99,69 @@ export const GetPokemonsByType = async (dispatch: any, type: any, navigate: any)
     console.log(error);
   }
 };
-
-
-export const GetPokemonByIdDetails = async (dispatch: any, id: any, navigate: any) => {
- 
-
+export const GetPokemonByIdDetails = async (
+  dispatch: any,
+  id: any,
+  navigate: any
+) => {
   try {
-    const  response  = await api.get(`pokemon/${id}`);
-
+    const response = await api.get(`pokemon/${id}`);
     const pokemonDispatch = {
       type: "SET_ACTIVE_POKEMON",
       pokemons: response.data,
       loadingActivePokemon: false,
     };
-
-     
-    if(id > 151){
+    if (id > 151) {
       navigate("/");
     }
-    
     dispatch(pokemonDispatch);
-    
-    
-    console.log(response.status);
-    
-    
   } catch (error) {
     console.log(error);
-    if(error){      
-      navigate('/');
+    if (error) {
+      navigate("/");
     }
   }
-}
-
+};
 
 export const GetPokemonById = async (dispatch: any, id: any) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-
   try {
-    const  response  = await axios.get(url);
-
-    console.log(response);
-    
-
+    const response = await axios.get(url);
     const pokemonDispatch = {
       type: "SET_ACTIVE_POKEMON",
       pokemons: response.data,
       loadingActivePokemon: false,
     };
-
-     
-
     dispatch(pokemonDispatch);
-    
-
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-
-export const GetPokemonByName = async(dispatch: any, inputValue: any, listPokemon: any, setName: any) => {
+export const GetPokemonByName = async (
+  dispatch: any,
+  inputValue: any,
+  listPokemon: any,
+  setName: any
+) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${inputValue}`;
-
-
   try {
-    const  {data}  = await axios.get(url);
-
-    
+    const { data } = await axios.get(url);
     const pokemonDispatch = {
       type: "SET_TYPES",
       listTypesPokemon: data,
       loadingTypesPokemon: false,
     };
-
-
     dispatch(pokemonDispatch);
     console.log(pokemonDispatch);
-    
-    
-    
-
   } catch (error) {
     console.log(error);
   }
-}
-
-
+};
 export const isLoading = (dispatch: any) => {
   const pokemonsDispatch = {
     type: "IS_LOADING_TYPES",
     loadingTypesPokemon: false,
   };
-
   dispatch(pokemonsDispatch);
-}
-
-
+};

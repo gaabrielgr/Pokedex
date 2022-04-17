@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import arrowTopPage from "../images/arrowTopScrollMed.png";
 import { connect } from "react-redux";
 import Loading from "../components/Loading";
+import Notiflix from "notiflix";
 import {
   GetPokemonById,
   getPokemonByType,
@@ -28,13 +29,15 @@ import {
   ContainerSearch,
   Footer,
   TitleType,
+  ContainerTitleMenuLateral,
+  SearchPokemon,
+  ButtonHome,
+  SearchImg,
 } from "./Home.styles";
 import { Link } from "react-router-dom";
-
+import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
-import api from "../api";
-import axios from "axios";
-
+import gpsPoke from "../images/gps.png";
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
   const { pokemons, dispatch, typesPokemon, listTypesPokemon, pokemonsByPage } = pokemon;
@@ -62,6 +65,11 @@ const Home = (pokemon: any) => {
     
     console.log(pokemon);
 
+  useEffect(() => {
+    GetPokemons(dispatch);
+    if (listTypesPokemon) {
+    }
+  }, []);
 
   if (pokemon.loading) {
     return <Loading />;
@@ -72,13 +80,15 @@ const Home = (pokemon: any) => {
     let find = pokemons.find(
       (pokemon: any) => pokemon.name === handleInput.toLowerCase()
     );
-    console.log(find);
 
     setHandleSearch(true);
     if (find) {
       navigate(`/details/${find.id}`);
     } else {
-      alert("não existe");
+      Notiflix.Notify.failure("Pokemon não encontrado!", {
+        timeout: 1000,
+        position: "center-top",
+      });
     }
   };
 
@@ -104,17 +114,24 @@ const Home = (pokemon: any) => {
     <ContainerHome>
       <ContainerMenuLateral>
         <ContainerSearch>
-          <button onClick={() => setHandleType(false)}>HOME</button>
+          <ButtonHome onClick={() => setHandleType(false)}>HOME</ButtonHome>
           <form onSubmit={findPokemon}>
-            <input
+            <SearchPokemon
               type="text"
+              placeholder="Pesquise seu pokemon..."
               onChange={(e) => setHandleInput(e.target.value)}
             />
           </form>
+          <SearchImg src={searchImg} alt="" width={"20px"} height={"20px"} />
         </ContainerSearch>
         <UlMenuLateral>
+          <ContainerTitleMenuLateral>
+            <h1>Menu Types Pokemons</h1>
+          </ContainerTitleMenuLateral>
+
           {filterArr(results).map((type: any) => (
             <LiMenuLateral>
+              <img src={gpsPoke} alt="" width={"16px"} height={"16px"} />
               <ItemMenu>
                 <ItemMenuLink
                   onClick={() => listPokeMenu(dispatch, type.name, pokemons)}
@@ -134,7 +151,7 @@ const Home = (pokemon: any) => {
           </TitleType>
         ) : (
           <TitleType>
-            <h1>ALL Pokes 1°Geração</h1>
+            <h1>ALL Pokemons 1°Generation</h1>
           </TitleType>
         )}
         {handleType
@@ -197,7 +214,10 @@ const Home = (pokemon: any) => {
             
       </ContainerCards>
       <Footer>
-        <p> Projeto realizado no VemSer DBC</p>
+        <p>
+          Projeto realizado no VemSer 2022 DBC-Company - Gabriel Gomes e Rafael
+          Santini
+        </p>
         <a
           onClick={() => {
             topPage();
