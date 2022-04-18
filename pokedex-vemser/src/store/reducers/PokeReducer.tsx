@@ -1,7 +1,7 @@
 export const INITIAL_STATE = {
   pokemons: [],
   loading: true,
-  error: true,
+  error: false,
 
   typesPokemon: [],
 
@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
 
   activePokemon: [],
   loadingActivePokemon: true,
-  errorActivePokemon: true
+  errorActivePokemon: false
 
 };
 

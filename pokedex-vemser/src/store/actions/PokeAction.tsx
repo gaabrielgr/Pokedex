@@ -1,5 +1,6 @@
 import axios from "axios";
 import api from "../../api";
+
 export const GetPokemons = async (dispatch: any) => {
   const idPokemons = (id: any) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
