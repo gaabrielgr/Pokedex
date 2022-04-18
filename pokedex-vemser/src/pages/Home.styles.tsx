@@ -4,7 +4,7 @@ import beforePoke from "../images/beforePoke.png";
 export const ContainerHome = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
-  background-color: #eeeeee;
+  background-color: rgb(238, 238, 238, 0.5);
 `;
 
 export const ContainerCards = styled.ul`
@@ -290,7 +290,7 @@ export const ButtonHome = styled.a`
 
 export const ContainerMenuLateral = styled.nav`
   margin-right: 20px;
-  background-color: #eeeeee;
+  background-color: rgb(238, 238, 238, 0.5);
 `;
 
 export const UlMenuLateral = styled.ul`

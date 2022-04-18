@@ -40,6 +40,7 @@ import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
 import arrowHome from "../images/arrowHome.png";
+
 import Error from "../components/error/Error";
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
