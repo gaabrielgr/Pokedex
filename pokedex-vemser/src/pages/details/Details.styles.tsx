@@ -103,7 +103,7 @@ export const PokemonImg = styled.div`
 `;
 
 export const ImgStand = styled.img`
-  margin-top: -100px;
+  margin-top: -125px;
   src: ${(props) => props.src};
 `;
 

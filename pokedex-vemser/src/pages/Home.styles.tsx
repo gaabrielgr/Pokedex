@@ -1,24 +1,6 @@
 import styled from "styled-components";
 import beforePoke from "../images/beforePoke.png";
 
-/* import normalImg from "../images/.png";
-import fightingImg from "../images/.png";
-import flyingImg from "../images/.png";
-import PoisonImg from "../images/.png";
-import groundImg from "../images/.png";
-import rockImg from "../images/.png";
-import bugImg from "../images/.png";
-import ghostImg from "../images/.png";
-import stellImg from "../images/.png";
-import fireImg from "../images/.png";
-import waterImg from "../images/.png";
-import grassImg from "../images/.png";
-import eletricImg from "../images/.png";
-import psychicImg from "../images/.png";
-import iceImg from "../images/.png";
-import dragonImg from "../images/.png";
-import fairyImg from "../images/.png";
-import { url } from "inspector"; */
 export const ContainerHome = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
@@ -42,13 +24,12 @@ export const TitleType = styled.div`
   grid-column-end: 4;
 `;
 
-export const Card = styled.li`
+export const Card = styled.li<{ bd: any }>`
   display: flex;
   background-color: #fff;
   flex-direction: column;
   justify-content: space-between;
   height: 250px;
-
   border: 2px solid;
   border-radius: 8px;
   border-color: ${(props: any) => {
@@ -89,6 +70,44 @@ export const Card = styled.li`
         return "white";
     }
   }};
+  box-shadow: 0px 0px 8px -1px ${(props: any) => {
+      switch (props.bd) {
+        case "steel":
+          return "#B7B7CE";
+        case "fire":
+          return "#EE8130";
+        case "grass":
+          return "#7AC74C";
+        case "electric":
+          return "#F7D02C";
+        case "water":
+          return "#6390F0";
+        case "ice":
+          return "#96D9D6";
+        case "ground":
+          return "#E2BF65";
+        case "rock":
+          return "#B6A136";
+        case "fairy":
+          return "#D685AD ";
+        case "poison":
+          return "#A33EA1";
+        case "dragon":
+          return "#6F35FC";
+        case "psychic":
+          return "#F95587";
+        case "normal":
+          return "#A8A77A";
+        case "bug":
+          return "#A6B91A";
+        case "ghost":
+          return "#735797";
+        case "fighting":
+          return "#C22E28";
+        default:
+          return "white";
+      }
+    }};
 `;
 export const BackgroundCardImg = styled.div`
   display: flex;
@@ -236,7 +255,10 @@ export const ContainerSearch = styled.div`
   border-right: 1px solid #fff;
   position: relative;
 `;
-
+export const ReturnHome = styled.img`
+  opacity: 0.5;
+  transform: rotate(270deg);
+`;
 export const SearchPokemon = styled.input`
   width: 100%;
   border: none;
@@ -247,19 +269,22 @@ export const SearchPokemon = styled.input`
 `;
 export const SearchImg = styled.img`
   position: absolute;
-  top: 48px;
-  right: 5px;
+  top: 58px;
+  right: 1px;
   opacity: 0.4;
 `;
 
-export const ButtonHome = styled.button`
-  width: 100%;
-  height: 40px;
-  font-weight: bold;
-  font-size: 20px;
+export const ButtonHome = styled.a`
+  padding: 5px 0px 5px 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   :hover {
     background-color: #dfdfdf;
+  }
+  h3 {
+    padding-left: 5px;
   }
 `;
 

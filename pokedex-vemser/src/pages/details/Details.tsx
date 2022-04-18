@@ -121,10 +121,10 @@ function Details(pokemon: any) {
           <PokeCard src={pokeCard} alt="" right="1px" bottom="1px" />
           <PokemonImg>
             <ImgStand
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${activePokemon.id}.svg`}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${activePokemon.id}.png`}
               alt="imagem pokemon"
-              width={"200px"}
-              height={"200px"}
+              width={"250px"}
+              height={"250px"}
             />
           </PokemonImg>
           <PokemonTypes>

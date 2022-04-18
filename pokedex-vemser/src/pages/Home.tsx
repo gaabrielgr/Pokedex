@@ -33,11 +33,13 @@ import {
   SearchPokemon,
   ButtonHome,
   SearchImg,
+  ReturnHome,
 } from "./Home.styles";
 import { Link } from "react-router-dom";
 import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
+import arrowHome from "../images/arrowHome.png";
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
   const { pokemons, dispatch, typesPokemon, listTypesPokemon } = pokemon;
@@ -105,7 +107,10 @@ const Home = (pokemon: any) => {
     <ContainerHome>
       <ContainerMenuLateral>
         <ContainerSearch>
-          <ButtonHome onClick={() => setHandleType(false)}>HOME</ButtonHome>
+          <ButtonHome onClick={() => setHandleType(false)}>
+            <ReturnHome src={arrowHome} alt="" height={"24px"} width={"24px"} />
+            <h3>Home</h3>
+          </ButtonHome>
           <form onSubmit={findPokemon}>
             <SearchPokemon
               type="text"
@@ -151,7 +156,11 @@ const Home = (pokemon: any) => {
                 to={`/details/${poke.id}`}
                 onClick={() => GetPokemonById(dispatch, poke.id)}
               >
-                <Card key={poke.id} color={poke.types[0].type.name}>
+                <Card
+                  key={poke.id}
+                  bd={poke.types[0].type.name}
+                  color={poke.types[0].type.name}
+                >
                   <BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
                   </BackgroundCardImg>
@@ -179,7 +188,11 @@ const Home = (pokemon: any) => {
                 to={`/details/${poke.id}`}
                 onClick={() => GetPokemonById(dispatch, poke.id)}
               >
-                <Card key={poke.id} color={poke.types[0].type.name}>
+                <Card
+                  key={poke.id}
+                  bd={poke.types[0].type.name}
+                  color={poke.types[0].type.name}
+                >
                   <BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
                   </BackgroundCardImg>
@@ -190,7 +203,7 @@ const Home = (pokemon: any) => {
                   </ContainerIdCard>
                   <ContainerCardImg>
                     <CardImg
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`}
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
                       alt=""
                     />
                   </ContainerCardImg>
