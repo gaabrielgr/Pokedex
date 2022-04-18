@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { GetPokemonById } from "../../store/actions/PokeAction";
 import { useNavigate, useParams } from "react-router-dom";
+import Aos from "aos";
+import "aos/dist/aos.css";
 import {
   AbilitySpan,
   ArrowImg,
@@ -30,14 +31,13 @@ import {
   ReturnDetails,
   PokeCard,
 } from "./Details.styles";
+import { GetPokemonById } from "../../store/actions/PokeAction";
 import pokeCard from "../../images/pokeBackGround.png";
 import arrow from "../../images/Arrow.svg";
 import Weight from "../../images/weight.svg";
 import Height from "../../images/height.svg";
 import api from "../../api";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
-import Aos from "aos";
-import "aos/dist/aos.css";
 import Loading from "../../components/Loading";
 import Error from "../../components/error/Error";
 
@@ -52,15 +52,10 @@ function Details(pokemon: any) {
       const response = await api.get(`pokemon-species/${id}`);
       const { data } = response;
       setDescription(data.flavor_text_entries[8].flavor_text);
-      
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(pokemon);
-
-  
 
   useEffect(() => {
     GetPokemonById(dispatch, idParams);
@@ -72,8 +67,8 @@ function Details(pokemon: any) {
     return <Loading />;
   }
 
-  if(pokemon.error) {
-    return <Error />
+  if (pokemon.error) {
+    return <Error />;
   }
 
   const upperCaseLetter = (str: string) => {
