@@ -21,10 +21,12 @@ export const GetPokemons = async (dispatch: any) => {
       pokemons: pokemons,
       loading: false,
       typesPokemon: data,
+      error: false,
     };
 
     dispatch(pokemonsDispatch);
   } catch (error) {
+    isError(dispatch);
     console.log(error);
   }
 };
@@ -99,29 +101,7 @@ export const GetPokemonsByType = async (
     console.log(error);
   }
 };
-export const GetPokemonByIdDetails = async (
-  dispatch: any,
-  id: any,
-  navigate: any
-) => {
-  try {
-    const response = await api.get(`pokemon/${id}`);
-    const pokemonDispatch = {
-      type: "SET_ACTIVE_POKEMON",
-      pokemons: response.data,
-      loadingActivePokemon: false,
-    };
-    if (id > 151) {
-      navigate("/");
-    }
-    dispatch(pokemonDispatch);
-  } catch (error) {
-    console.log(error);
-    if (error) {
-      navigate("/");
-    }
-  }
-};
+
 
 export const GetPokemonById = async (dispatch: any, id: any) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -134,6 +114,7 @@ export const GetPokemonById = async (dispatch: any, id: any) => {
     };
     dispatch(pokemonDispatch);
   } catch (error) {
+    isErrorActivePokemon(dispatch);
     console.log(error);
   }
 };
@@ -165,3 +146,22 @@ export const isLoading = (dispatch: any) => {
   };
   dispatch(pokemonsDispatch);
 };
+
+export const isError = (dispatch: any) => {
+  const pokemonsDispatch = {
+    type: "IS_ERROR",
+    error: true,
+    loading: false,
+  };
+  dispatch(pokemonsDispatch);
+}
+
+export const isErrorActivePokemon = (dispatch: any) => {
+  const pokemonsDispatch = {
+    type: "IS_ERROR_ACTIVE_POKEMON",
+    errorActivePokemon: true,
+    loadingActivePokemon: false,
+  };
+
+  dispatch(pokemonsDispatch);
+}

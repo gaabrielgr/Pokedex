@@ -40,14 +40,19 @@ import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
 import arrowHome from "../images/arrowHome.png";
+import Error from "../components/error/Error";
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
-  const { pokemons, dispatch, typesPokemon, listTypesPokemon } = pokemon;
+  const { pokemons, dispatch, typesPokemon, listTypesPokemon, pokemonsByPage } =
+    pokemon;
   const { results } = typesPokemon;
   const navigate = useNavigate();
   const [handleInput, setHandleInput] = useState("");
   const [handleSearch, setHandleSearch] = useState(false);
   const [typeName, setTypeName] = useState("");
+
+  console.log(results);
+  console.log(pokemon);
 
   const filterArr = (arr: any) => {
     return arr.filter(
@@ -60,12 +65,22 @@ const Home = (pokemon: any) => {
 
   useEffect(() => {
     GetPokemons(dispatch);
+  }, []);
+
+  console.log(pokemon);
+
+  useEffect(() => {
+    GetPokemons(dispatch);
     if (listTypesPokemon) {
     }
   }, []);
 
   if (pokemon.loading) {
     return <Loading />;
+  }
+
+  if (pokemon.error) {
+    return <Error />;
   }
 
   const findPokemon = (e: any) => {
@@ -238,6 +253,7 @@ const mapStateToProps = (state: any) => ({
   typesPokemon: state.pokeReducer.typesPokemon,
   listTypesPokemon: state.pokeReducer.listTypesPokemon,
   loadingTypesPokemon: state.pokeReducer.loadingTypesPokemon,
+  error: state.pokeReducer.error,
 });
 
 export default connect(mapStateToProps)(Home);

@@ -1,14 +1,18 @@
 export const INITIAL_STATE = {
   pokemons: [],
   loading: true,
+  error: true,
 
   typesPokemon: [],
 
   listTypesPokemon: [],
   loadingTypesPokemon: true,
 
+
   activePokemon: [],
   loadingActivePokemon: true,
+  errorActivePokemon: true
+
 };
 
 const pokeReducer = (state = INITIAL_STATE, action: any) => {
@@ -18,6 +22,7 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       pokemons: action.pokemons,
       loading: action.loading,
       typesPokemon: action.typesPokemon,
+      error: action.error,
     };
   }
   if (action.type === "SET_TYPES") {
@@ -25,6 +30,7 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       ...state,
       loadingTypesPokemon: action.loadingTypesPokemon,
       listTypesPokemon: action.listTypesPokemon,
+
     };
   }
 
@@ -33,6 +39,7 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       ...state,
       activePokemon: action.pokemons,
       loadingActivePokemon: action.loadingActivePokemon,
+      errorActivePokemon: action.errorActivePokemon
     };
   }
 
@@ -42,6 +49,24 @@ const pokeReducer = (state = INITIAL_STATE, action: any) => {
       loadingTypesPokemon: action.loadingTypesPokemon,
     };
   }
+
+  if(action.type === "IS_ERROR") {
+    return {
+      ...state,
+      error: action.error,
+      loading: action.loading,
+      
+    }
+  }
+
+  if(action.type === 'IS_ERROR_ACTIVE_POKEMON') {
+    return {
+      ...state,
+      errorActivePokemon: action.errorActivePokemon,
+      loadingActivePokemon: action.loadingActivePokemon,
+    }
+  }
+
 
   return state;
 };
