@@ -181,7 +181,7 @@ const Home = (pokemon: any) => {
                   </ContainerIdCard>
                   <ContainerCardImg>
                     <CardImg
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`}
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
                       alt=""
                     />
                   </ContainerCardImg>
