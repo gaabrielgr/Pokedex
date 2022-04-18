@@ -4,7 +4,7 @@ import beforePoke from "../images/beforePoke.png";
 export const ContainerHome = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
-  background-color: #eeeeee;
+  background-color: rgb(238, 238, 238, 0.5);
 `;
 
 export const ContainerCards = styled.ul`
@@ -290,7 +290,7 @@ export const ButtonHome = styled.a`
 
 export const ContainerMenuLateral = styled.nav`
   margin-right: 20px;
-  background-color: #eeeeee;
+  background-color: rgb(238, 238, 238, 0.5);
 `;
 
 export const UlMenuLateral = styled.ul`
@@ -361,45 +361,3 @@ export const Footer = styled.footer`
     padding-bottom: 0px;
   }
 `;
-
-/* export const ImgMenu = styled.img.attrs({
-src: url
-${(props: any) => {
-  switch (props.source) {
-    case "steel":
-      return `${stellImg}`;
-    case "fire":
-      return "#EE8130";
-    case "grass":
-      return "#7AC74C";
-    case "electric":
-      return "#F7D02C";
-    case "water":
-      return "#6390F0";
-    case "ice":
-      return "#96D9D6";
-    case "ground":
-      return "#E2BF65";
-    case "rock":
-      return "#B6A136";
-    case "fairy":
-      return "#D685AD ";
-    case "poison":
-      return "#A33EA1";
-    case "dragon":
-      return "#6F35FC";
-    case "psychic":
-      return "#F95587";
-    case "normal":
-      return "#A8A77A";
-    case "bug":
-      return "#A6B91A";
-    case "ghost":
-      return "#735797";
-    case "fighting":
-      return "#C22E28";
-    default:
-      return "white";
-  }
-}};
-}) */

@@ -103,7 +103,6 @@ export const GetPokemonsByType = async (
   }
 };
 
-
 export const GetPokemonById = async (dispatch: any, id: any) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   try {
@@ -135,7 +134,6 @@ export const GetPokemonByName = async (
       loadingTypesPokemon: false,
     };
     dispatch(pokemonDispatch);
-    console.log(pokemonDispatch);
   } catch (error) {
     console.log(error);
   }
@@ -155,7 +153,7 @@ export const isError = (dispatch: any) => {
     loading: false,
   };
   dispatch(pokemonsDispatch);
-}
+};
 
 export const isErrorActivePokemon = (dispatch: any) => {
   const pokemonsDispatch = {
@@ -165,4 +163,4 @@ export const isErrorActivePokemon = (dispatch: any) => {
   };
 
   dispatch(pokemonsDispatch);
-}
+};

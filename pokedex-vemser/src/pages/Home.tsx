@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import arrowTopPage from "../images/arrowTopScrollMed.png";
-import { connect } from "react-redux";
-import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 import Notiflix from "notiflix";
+import { connect } from "react-redux";
+import arrowTopPage from "../images/arrowTopScrollMed.png";
+import Loading from "../components/Loading";
 import {
   GetPokemonById,
   getPokemonByType,
@@ -35,12 +36,12 @@ import {
   SearchImg,
   ReturnHome,
 } from "./Home.styles";
-import { Link } from "react-router-dom";
 import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
 import arrowHome from "../images/arrowHome.png";
 import Error from "../components/error/Error";
+
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
   const { pokemons, dispatch, typesPokemon, listTypesPokemon, pokemonsByPage } =
@@ -50,9 +51,6 @@ const Home = (pokemon: any) => {
   const [handleInput, setHandleInput] = useState("");
   const [handleSearch, setHandleSearch] = useState(false);
   const [typeName, setTypeName] = useState("");
-
-  console.log(results);
-  console.log(pokemon);
 
   const filterArr = (arr: any) => {
     return arr.filter(
@@ -66,8 +64,6 @@ const Home = (pokemon: any) => {
   useEffect(() => {
     GetPokemons(dispatch);
   }, []);
-
-  console.log(pokemon);
 
   useEffect(() => {
     GetPokemons(dispatch);
@@ -113,7 +109,6 @@ const Home = (pokemon: any) => {
   function listPokeMenu(action: any, type: any, pokemons: any) {
     getPokemonByType(action, type, pokemons);
     setTypeName(type);
-
     setHandleType(true);
     topPage();
   }
@@ -129,7 +124,7 @@ const Home = (pokemon: any) => {
           <form onSubmit={findPokemon}>
             <SearchPokemon
               type="text"
-              placeholder="Pesquise seu pokemon..."
+              placeholder="Search your pokemon..."
               onChange={(e) => setHandleInput(e.target.value)}
             />
           </form>
@@ -141,7 +136,7 @@ const Home = (pokemon: any) => {
           </ContainerTitleMenuLateral>
 
           {filterArr(results).map((type: any) => (
-            <LiMenuLateral>
+            <LiMenuLateral key={type.name}>
               <img src={gpsPoke} alt="" width={"16px"} height={"16px"} />
               <ItemMenu>
                 <ItemMenuLink
@@ -170,9 +165,9 @@ const Home = (pokemon: any) => {
               <Link
                 to={`/details/${poke.id}`}
                 onClick={() => GetPokemonById(dispatch, poke.id)}
+                key={poke.id}
               >
                 <Card
-                  key={poke.id}
                   bd={poke.types[0].type.name}
                   color={poke.types[0].type.name}
                 >
@@ -186,7 +181,7 @@ const Home = (pokemon: any) => {
                   </ContainerIdCard>
                   <ContainerCardImg>
                     <CardImg
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${poke.id}.svg`}
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
                       alt=""
                     />
                   </ContainerCardImg>
@@ -202,9 +197,9 @@ const Home = (pokemon: any) => {
               <Link
                 to={`/details/${poke.id}`}
                 onClick={() => GetPokemonById(dispatch, poke.id)}
+                key={poke.id}
               >
                 <Card
-                  key={poke.id}
                   bd={poke.types[0].type.name}
                   color={poke.types[0].type.name}
                 >
