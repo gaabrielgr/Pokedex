@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Notiflix from "notiflix";
 import { connect } from "react-redux";
 import * as C from "./Home.styles";
-
 import arrowTopPage from "../images/arrowTopScrollMed.png";
 import Loading from "../components/Loading";
 import { topPage } from "../utils/Utils";
@@ -13,7 +12,6 @@ import {
   GetPokemons,
 } from "../store/actions/PokeAction";
 import searchImg from "../images/searchImg.png";
-import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
 import arrowHome from "../images/arrowHome.png";
 import Error from "../components/error/Error";
