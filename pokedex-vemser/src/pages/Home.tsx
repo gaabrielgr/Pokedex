@@ -16,35 +16,7 @@ import {
   getPokemonByType,
   GetPokemons,
 } from "../store/actions/PokeAction";
-import {
-  BackgroundCardImg,
-  ColorCard,
-  IdCard,
-  ContainerNamePokemon,
-  ContainerCards,
-  Card,
-  CardImg,
-  ContainerCardImg,
-  ContainerIdCard,
-  TitleCard,
-  ContainerHome,
-  ContainerMenuLateral,
-  UlMenuLateral,
-  LiMenuLateral,
-  ItemMenu,
-  ItemMenuLink,
-  ContainerSearch,
-  Footer,
-  TitleType,
-  ContainerTitleMenuLateral,
-  SearchPokemon,
-  ButtonHome,
-  SearchImg,
-  ReturnHome,
-  Title,
-  Form,
-  ImgSearch,
-} from "./Home.styles";
+import * as C from "./Home.styles";
 import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
@@ -112,50 +84,60 @@ const Home = (pokemon: any) => {
   }
 
   return (
-    <ContainerHome>
-      <ContainerMenuLateral>
-        <ContainerSearch>
-          <ButtonHome onClick={() => setHandleType(false)}>
-            <ReturnHome src={arrowHome} alt="" height={"24px"} width={"24px"} />
-            <Title small>Home</Title>
-          </ButtonHome>
-          <Form onSubmit={findPokemon}>
-            <SearchPokemon
+    <C.ContainerHome>
+      <C.ContainerMenuLateral>
+        <C.ContainerSearch>
+          <C.ButtonHome onClick={() => setHandleType(false)}>
+            <C.ReturnHome
+              src={arrowHome}
+              alt=""
+              height={"24px"}
+              width={"24px"}
+            />
+            <C.Title small>Home</C.Title>
+          </C.ButtonHome>
+          <C.Form onSubmit={findPokemon}>
+            <C.SearchPokemon
               type="text"
               placeholder="Search your pokemon..."
               onChange={(e) => setHandleInput(e.target.value)}
             />
-          </Form>
-          <SearchImg src={searchImg} alt="" width={"20px"} height={"20px"} />
-        </ContainerSearch>
-        <UlMenuLateral>
-          <ContainerTitleMenuLateral>
-            <Title>Menu Types Pokemons </Title>
-          </ContainerTitleMenuLateral>
+          </C.Form>
+          <C.SearchImg src={searchImg} alt="" width={"20px"} height={"20px"} />
+        </C.ContainerSearch>
+        <C.UlMenuLateral>
+          <C.ContainerTitleMenuLateral>
+            <C.Title>Menu Types Pokemons </C.Title>
+          </C.ContainerTitleMenuLateral>
 
           {filterArr(results).map((type: any) => (
-            <LiMenuLateral key={type.name}>
-              <ImgSearch src={gpsPoke} alt="" width={"16px"} height={"16px"} />
-              <ItemMenu>
-                <ItemMenuLink
+            <C.LiMenuLateral key={type.name}>
+              <C.ImgSearch
+                src={gpsPoke}
+                alt=""
+                width={"16px"}
+                height={"16px"}
+              />
+              <C.ItemMenu>
+                <C.ItemMenuLink
                   onClick={() => listPokeMenu(dispatch, type.name, pokemons)}
                 >
                   {type.name}
-                </ItemMenuLink>
-              </ItemMenu>
-            </LiMenuLateral>
+                </C.ItemMenuLink>
+              </C.ItemMenu>
+            </C.LiMenuLateral>
           ))}
-        </UlMenuLateral>
-      </ContainerMenuLateral>
-      <ContainerCards>
+        </C.UlMenuLateral>
+      </C.ContainerMenuLateral>
+      <C.ContainerCards>
         {handleType ? (
-          <TitleType>
-            <Title>{typeName}</Title>
-          </TitleType>
+          <C.TitleType>
+            <C.Title>{typeName}</C.Title>
+          </C.TitleType>
         ) : (
-          <TitleType>
-            <Title>ALL Pokemons 1°Generation</Title>
-          </TitleType>
+          <C.TitleType>
+            <C.Title>ALL Pokemons 1°Generation</C.Title>
+          </C.TitleType>
         )}
         {handleType
           ? listTypesPokemon.map((poke: any) => (
@@ -164,32 +146,32 @@ const Home = (pokemon: any) => {
                 onClick={() => GetPokemonById(dispatch, poke.id)}
                 key={poke.id}
               >
-                <Card
+                <C.Card
                   boxShadow={ColorStandard(poke.types[0].type.name)}
                   color={ColorStandard(poke.types[0].type.name)}
                 >
-                  <BackgroundCardImg>
+                  <C.BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
-                  </BackgroundCardImg>
-                  <ContainerIdCard>
-                    <IdCard color={ColorStandard(poke.types[0].type.name)}>
+                  </C.BackgroundCardImg>
+                  <C.ContainerIdCard>
+                    <C.IdCard color={ColorStandard(poke.types[0].type.name)}>
                       #{zeroLeft(poke.id)}
-                    </IdCard>
-                  </ContainerIdCard>
-                  <ContainerCardImg>
-                    <CardImg
+                    </C.IdCard>
+                  </C.ContainerIdCard>
+                  <C.ContainerCardImg>
+                    <C.CardImg
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
                       alt=""
                     />
-                  </ContainerCardImg>
-                  <ContainerNamePokemon>
-                    <ColorCard color={ColorStandard(poke.types[0].type.name)}>
-                      <TitleCard bg="#fff" size="20px" marginB="5px">
+                  </C.ContainerCardImg>
+                  <C.ContainerNamePokemon>
+                    <C.ColorCard color={ColorStandard(poke.types[0].type.name)}>
+                      <C.TitleCard bg="#fff" size="20px" marginB="5px">
                         {upperCaseLetter(poke.name)}{" "}
-                      </TitleCard>
-                    </ColorCard>
-                  </ContainerNamePokemon>
-                </Card>
+                      </C.TitleCard>
+                    </C.ColorCard>
+                  </C.ContainerNamePokemon>
+                </C.Card>
               </Link>
             ))
           : pokemons.map((poke: any) => (
@@ -198,36 +180,36 @@ const Home = (pokemon: any) => {
                 onClick={() => GetPokemonById(dispatch, poke.id)}
                 key={poke.id}
               >
-                <Card
+                <C.Card
                   boxShadow={ColorStandard(poke.types[0].type.name)}
                   color={ColorStandard(poke.types[0].type.name)}
                 >
-                  <BackgroundCardImg>
+                  <C.BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
-                  </BackgroundCardImg>
-                  <ContainerIdCard>
-                    <IdCard color={ColorStandard(poke.types[0].type.name)}>
+                  </C.BackgroundCardImg>
+                  <C.ContainerIdCard>
+                    <C.IdCard color={ColorStandard(poke.types[0].type.name)}>
                       #{zeroLeft(poke.id)}
-                    </IdCard>
-                  </ContainerIdCard>
-                  <ContainerCardImg>
-                    <CardImg
+                    </C.IdCard>
+                  </C.ContainerIdCard>
+                  <C.ContainerCardImg>
+                    <C.CardImg
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
                       alt=""
                     />
-                  </ContainerCardImg>
-                  <ContainerNamePokemon>
-                    <ColorCard color={ColorStandard(poke.types[0].type.name)}>
-                      <TitleCard bg="#fff" size="20px" marginB="5px">
+                  </C.ContainerCardImg>
+                  <C.ContainerNamePokemon>
+                    <C.ColorCard color={ColorStandard(poke.types[0].type.name)}>
+                      <C.TitleCard bg="#fff" size="20px" marginB="5px">
                         {upperCaseLetter(poke.name)}{" "}
-                      </TitleCard>
-                    </ColorCard>
-                  </ContainerNamePokemon>
-                </Card>
+                      </C.TitleCard>
+                    </C.ColorCard>
+                  </C.ContainerNamePokemon>
+                </C.Card>
               </Link>
             ))}
-      </ContainerCards>
-      <Footer>
+      </C.ContainerCards>
+      <C.Footer>
         <p>
           Projeto realizado no VemSer 2022 DBC-Company - Gabriel Gomes e Rafael
           Santini
@@ -239,8 +221,8 @@ const Home = (pokemon: any) => {
         >
           <img src={arrowTopPage} alt="" />
         </a>
-      </Footer>
-    </ContainerHome>
+      </C.Footer>
+    </C.ContainerHome>
   );
 };
 const mapStateToProps = (state: any) => ({
