@@ -1,27 +1,23 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import Notiflix from "notiflix";
 import { connect } from "react-redux";
+import * as C from "./Home.styles";
+
 import arrowTopPage from "../images/arrowTopScrollMed.png";
 import Loading from "../components/Loading";
-import {
-  ColorStandard,
-  zeroLeft,
-  topPage,
-  upperCaseLetter,
-} from "../utils/Utils";
+import { topPage } from "../utils/Utils";
 import {
   GetPokemonById,
   getPokemonByType,
   GetPokemons,
 } from "../store/actions/PokeAction";
-import * as C from "./Home.styles";
 import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
 import arrowHome from "../images/arrowHome.png";
 import Error from "../components/error/Error";
+import Cards from "../components/cards/Cards";
 
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
@@ -129,6 +125,7 @@ const Home = (pokemon: any) => {
           ))}
         </C.UlMenuLateral>
       </C.ContainerMenuLateral>
+
       <C.ContainerCards>
         {handleType ? (
           <C.TitleType>
@@ -139,75 +136,20 @@ const Home = (pokemon: any) => {
             <C.Title>ALL Pokemons 1°Generation</C.Title>
           </C.TitleType>
         )}
-        {handleType
-          ? listTypesPokemon.map((poke: any) => (
-              <Link
-                to={`/details/${poke.id}`}
-                onClick={() => GetPokemonById(dispatch, poke.id)}
-                key={poke.id}
-              >
-                <C.Card
-                  boxShadow={ColorStandard(poke.types[0].type.name)}
-                  color={ColorStandard(poke.types[0].type.name)}
-                >
-                  <C.BackgroundCardImg>
-                    <img width={"400px"} src={pokeCard} alt="" />
-                  </C.BackgroundCardImg>
-                  <C.ContainerIdCard>
-                    <C.IdCard color={ColorStandard(poke.types[0].type.name)}>
-                      #{zeroLeft(poke.id)}
-                    </C.IdCard>
-                  </C.ContainerIdCard>
-                  <C.ContainerCardImg>
-                    <C.CardImg
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
-                      alt=""
-                    />
-                  </C.ContainerCardImg>
-                  <C.ContainerNamePokemon>
-                    <C.ColorCard color={ColorStandard(poke.types[0].type.name)}>
-                      <C.TitleCard bg="#fff" size="20px" marginB="5px">
-                        {upperCaseLetter(poke.name)}{" "}
-                      </C.TitleCard>
-                    </C.ColorCard>
-                  </C.ContainerNamePokemon>
-                </C.Card>
-              </Link>
-            ))
-          : pokemons.map((poke: any) => (
-              <Link
-                to={`/details/${poke.id}`}
-                onClick={() => GetPokemonById(dispatch, poke.id)}
-                key={poke.id}
-              >
-                <C.Card
-                  boxShadow={ColorStandard(poke.types[0].type.name)}
-                  color={ColorStandard(poke.types[0].type.name)}
-                >
-                  <C.BackgroundCardImg>
-                    <img width={"400px"} src={pokeCard} alt="" />
-                  </C.BackgroundCardImg>
-                  <C.ContainerIdCard>
-                    <C.IdCard color={ColorStandard(poke.types[0].type.name)}>
-                      #{zeroLeft(poke.id)}
-                    </C.IdCard>
-                  </C.ContainerIdCard>
-                  <C.ContainerCardImg>
-                    <C.CardImg
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${poke.id}.png`}
-                      alt=""
-                    />
-                  </C.ContainerCardImg>
-                  <C.ContainerNamePokemon>
-                    <C.ColorCard color={ColorStandard(poke.types[0].type.name)}>
-                      <C.TitleCard bg="#fff" size="20px" marginB="5px">
-                        {upperCaseLetter(poke.name)}{" "}
-                      </C.TitleCard>
-                    </C.ColorCard>
-                  </C.ContainerNamePokemon>
-                </C.Card>
-              </Link>
-            ))}
+
+        {handleType ? (
+          <Cards
+            pokemons={listTypesPokemon}
+            GetPokemonById={GetPokemonById}
+            dispatch={dispatch}
+          />
+        ) : (
+          <Cards
+            pokemons={pokemons}
+            GetPokemonById={GetPokemonById}
+            dispatch={dispatch}
+          />
+        )}
       </C.ContainerCards>
       <C.Footer>
         <p>
