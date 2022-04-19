@@ -40,12 +40,15 @@ import api from "../../api";
 import ProgressBar from "../../components/ProgressBar/ProgressBar";
 import Loading from "../../components/Loading";
 import Error from "../../components/error/Error";
+import Background from "../../enums/Backgroud";
 
 function Details(pokemon: any) {
   const { activePokemon, dispatch } = pokemon;
   const [description, setDescription] = useState("");
-  const { id: idParams } = useParams<string>();
+  const { idPoke } = useParams();
   const navigate = useNavigate();
+
+  
 
   const getPokemonSpecies = async (id: string | undefined) => {
     try {
@@ -61,8 +64,8 @@ function Details(pokemon: any) {
   
 
   useEffect(() => {
-    GetPokemonById(dispatch, idParams);
-    getPokemonSpecies(idParams);
+    GetPokemonById(dispatch, idPoke);
+    getPokemonSpecies(idPoke);
     Aos.init({ duration: 950 });
   }, []);
 
@@ -105,7 +108,7 @@ function Details(pokemon: any) {
 
   return (
     <>
-      <ContainerPai color={`${activePokemon?.types[0]?.type?.name}`}>
+      <ContainerPai color={Background[activePokemon?.types[0]?.type?.name]}>
         <ImgDiv>
           <ArrowName>
             <ReturnDetails onClick={() => navigate("/")}>
