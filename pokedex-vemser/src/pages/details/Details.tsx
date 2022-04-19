@@ -44,7 +44,7 @@ import Error from "../../components/error/Error";
 function Details(pokemon: any) {
   const { activePokemon, dispatch } = pokemon;
   const [description, setDescription] = useState("");
-  const { id: idParams } = useParams();
+  const { id: idParams } = useParams<string>();
   const navigate = useNavigate();
 
   const getPokemonSpecies = async (id: string | undefined) => {
@@ -56,6 +56,9 @@ function Details(pokemon: any) {
       console.log(error);
     }
   };
+
+
+  
 
   useEffect(() => {
     GetPokemonById(dispatch, idParams);
@@ -102,7 +105,7 @@ function Details(pokemon: any) {
 
   return (
     <>
-      <ContainerPai color={`${activePokemon.types[0].type.name}`}>
+      <ContainerPai color={`${activePokemon?.types[0]?.type?.name}`}>
         <ImgDiv>
           <ArrowName>
             <ReturnDetails onClick={() => navigate("/")}>
@@ -128,22 +131,21 @@ function Details(pokemon: any) {
             />
           </PokemonImg>
           <PokemonTypes>
-            {Object.keys(activePokemon.types).map((type: any) => (
+            {Object.keys(activePokemon.types).map((type: string) => (
               <Types key={type} color={activePokemon.types[type].type.name}>
                 {upperCaseLetter(activePokemon.types[type].type.name)}
               </Types>
             ))}
           </PokemonTypes>
           <PokemonInfo>
-            <TitleInfo mT="32px" color={activePokemon.types[0].type.name}>
-              {" "}
-              About{" "}
+            <TitleInfo mT="32px" color={activePokemon?.types[0]?.type?.name}>
+              About
             </TitleInfo>
           </PokemonInfo>
           <InfosPoke>
             <Info>
               <PokemonInfos>
-                <InfoImg src={Weight} />{" "}
+                <InfoImg src={Weight} />
                 <InfoSpan> {weightLeft(activePokemon.weight)}</InfoSpan>
               </PokemonInfos>
               <TitleSpan>Weight</TitleSpan>
@@ -156,7 +158,7 @@ function Details(pokemon: any) {
             </Info>
             <Info>
               <InfoAbilities>
-                {Object.keys(activePokemon.abilities).map((special: any) => (
+                {Object.keys(activePokemon.abilities).map((special: string) => (
                   <AbilitySpan
                     key={special}
                     color={activePokemon.abilities[special].ability.name}
@@ -174,30 +176,28 @@ function Details(pokemon: any) {
             <p>{description}</p>
           </Description>
           <PokemonInfo>
-            <TitleInfo mT="10px" color={activePokemon.types[0].type.name}>
-              {" "}
-              BaseStats{" "}
+            <TitleInfo mT="10px" color={activePokemon?.types[0]?.type?.name}>
+              BaseStats
             </TitleInfo>
           </PokemonInfo>
           <StatsBar>
-            {Object.keys(activePokemon.stats).map((stat: any) => (
+            {Object.keys(activePokemon.stats).map((stat: string) => (
               <Stats key={stat}>
                 <TitleInfo
                   bR="1px solid #E0E0E0"
                   wT="60px"
-                  color={activePokemon.types[0].type.name}
+                  color={activePokemon?.types[0]?.type?.name}
                 >
                   {abreviation(activePokemon.stats[stat].stat.name)}
                 </TitleInfo>
                 <InfoNumbers>
                   {zeroLeft(activePokemon.stats[stat].base_stat)}
                 </InfoNumbers>
-
                 <div>
                   <ProgressBar
                     abilities={activePokemon.stats[stat].base_stat}
-                    color={activePokemon.types[0].type.name}
-                    bgColor={activePokemon.types[0].type.name}
+                    color={activePokemon?.types[0]?.type?.name}
+                    bgColor={activePokemon?.types[0]?.type?.name}
                   />
                 </div>
               </Stats>

@@ -24,7 +24,7 @@ export const TitleType = styled.div`
   grid-column-end: 4;
 `;
 
-export const Card = styled.li<{ bd: any }>`
+export const Card = styled.li<{ bd: any, color: any }>`
   display: flex;
   background-color: #fff;
   flex-direction: column;
@@ -143,7 +143,7 @@ export const CardImg = styled.img`
   }
 `;
 
-export const ColorCard = styled.div`
+export const ColorCard = styled.div<{color: any}>`
   width: 100%;
   display: flex;
   height: 40px;
@@ -197,7 +197,7 @@ export const TitleCard = styled.h3`
 export const ContainerIdCard = styled.div`
   margin-right: 15px;
 `;
-export const IdCard = styled.p`
+export const IdCard = styled.p<{color: any}>`
   padding-top: 10px;
   text-align: right;
   font-weight: bold;

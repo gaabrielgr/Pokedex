@@ -41,6 +41,9 @@ import pokeCard from "../images/pokeBackGround.png";
 import gpsPoke from "../images/gps.png";
 import arrowHome from "../images/arrowHome.png";
 import Error from "../components/error/Error";
+import { PokemonDTO } from "../model/PokemonDTO";
+import { ListTypesDTO } from "../model/ListTypesDTO";
+import { TypesDTO } from "../model/TypesDTO";
 
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
@@ -52,24 +55,30 @@ const Home = (pokemon: any) => {
   const [handleSearch, setHandleSearch] = useState(false);
   const [typeName, setTypeName] = useState("");
 
-  const filterArr = (arr: any) => {
+  
+  
+  
+  
+  const filterArr = (arr: Array<ListTypesDTO>) => {
+    
     return arr.filter(
-      (item: any) =>
-        item.name !== "unknown" &&
-        item.name !== "dark" &&
-        item.name !== "shadow"
-    );
-  };
+      (item: ListTypesDTO) =>
+      item.name !== "unknown" &&
+      item.name !== "dark" &&
+      item.name !== "shadow"
+      );
+    };
+    
+    useEffect(() => {
+      GetPokemons(dispatch);
+    }, []);
+    
+    useEffect(() => {
+      GetPokemons(dispatch);
+      if (listTypesPokemon) {
+      }
+    }, []);
 
-  useEffect(() => {
-    GetPokemons(dispatch);
-  }, []);
-
-  useEffect(() => {
-    GetPokemons(dispatch);
-    if (listTypesPokemon) {
-    }
-  }, []);
 
   if (pokemon.loading) {
     return <Loading />;
@@ -79,10 +88,14 @@ const Home = (pokemon: any) => {
     return <Error />;
   }
 
+
+  console.log(pokemons);
+  
+
   const findPokemon = (e: any) => {
     e.preventDefault();
     let find = pokemons.find(
-      (pokemon: any) => pokemon.name === handleInput.toLowerCase()
+      (pokemon: PokemonDTO) => pokemon.name === handleInput.toLowerCase()
     );
 
     setHandleSearch(true);
@@ -106,7 +119,7 @@ const Home = (pokemon: any) => {
     return window.scrollTo(0, 0);
   }
 
-  function listPokeMenu(action: any, type: any, pokemons: any) {
+  function listPokeMenu(action: any, type: string, pokemons: PokemonDTO) {
     getPokemonByType(action, type, pokemons);
     setTypeName(type);
     setHandleType(true);
@@ -135,7 +148,7 @@ const Home = (pokemon: any) => {
             <h1>Menu Types Pokemons</h1>
           </ContainerTitleMenuLateral>
 
-          {filterArr(results).map((type: any) => (
+          {filterArr(results).map((type: ListTypesDTO) => (
             <LiMenuLateral key={type.name}>
               <img src={gpsPoke} alt="" width={"16px"} height={"16px"} />
               <ItemMenu>
@@ -161,21 +174,21 @@ const Home = (pokemon: any) => {
           </TitleType>
         )}
         {handleType
-          ? listTypesPokemon.map((poke: any) => (
+          ? listTypesPokemon.map((poke: PokemonDTO) => (
               <Link
                 to={`/details/${poke.id}`}
                 onClick={() => GetPokemonById(dispatch, poke.id)}
                 key={poke.id}
               >
                 <Card
-                  bd={poke.types[0].type.name}
-                  color={poke.types[0].type.name}
+                  bd={poke.types[0]?.type?.name}
+                  color={poke.types[0]?.type?.name}
                 >
                   <BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
                   </BackgroundCardImg>
                   <ContainerIdCard>
-                    <IdCard color={poke.types[0].type.name}>
+                    <IdCard color={poke.types[0]?.type?.name}>
                       #{zeroLeft(poke.id)}
                     </IdCard>
                   </ContainerIdCard>
@@ -186,30 +199,30 @@ const Home = (pokemon: any) => {
                     />
                   </ContainerCardImg>
                   <ContainerNamePokemon>
-                    <ColorCard color={poke.types[0].type.name}>
+                    <ColorCard color={poke.types[0]?.type?.name}>
                       <TitleCard>{upperCaseLetter(poke.name)} </TitleCard>
                     </ColorCard>
                   </ContainerNamePokemon>
                 </Card>
               </Link>
             ))
-          : pokemons.map((poke: any) => (
+          : pokemons.map((poke: PokemonDTO) => (
               <Link
                 to={`/details/${poke.id}`}
                 onClick={() => GetPokemonById(dispatch, poke.id)}
                 key={poke.id}
               >
                 <Card
-                  bd={poke.types[0].type.name}
-                  color={poke.types[0].type.name}
+                  bd={poke.types[0]?.type?.name}
+                  color={poke.types[0]?.type?.name}
                 >
                   <BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
                   </BackgroundCardImg>
                   <ContainerIdCard>
-                    <IdCard color={poke.types[0].type.name}>
+                    <IdCard color={poke.types[0]?.type?.name}>
                       #{zeroLeft(poke.id)}
-                    </IdCard>
+                    </IdCard> 
                   </ContainerIdCard>
                   <ContainerCardImg>
                     <CardImg
@@ -218,7 +231,7 @@ const Home = (pokemon: any) => {
                     />
                   </ContainerCardImg>
                   <ContainerNamePokemon>
-                    <ColorCard color={poke.types[0].type.name}>
+                    <ColorCard color={poke.types[0]?.type?.name}>
                       <TitleCard>{upperCaseLetter(poke.name)} </TitleCard>
                     </ColorCard>
                   </ContainerNamePokemon>
