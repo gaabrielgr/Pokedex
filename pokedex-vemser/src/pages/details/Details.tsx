@@ -3,34 +3,7 @@ import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import {
-  AbilitySpan,
-  ArrowImg,
-  ArrowName,
-  ContainerPai,
-  Description,
-  ImgDiv,
-  ImgStand,
-  Info,
-  InfoAbilities,
-  InfoImg,
-  InfoNumbers,
-  InfoSpan,
-  InfosPoke,
-  NamePokemon,
-  PokemonImg,
-  PokemonInfo,
-  PokemonInfos,
-  PokemonStand,
-  PokemonTypes,
-  Stats,
-  StatsBar,
-  TitleInfo,
-  TitleSpan,
-  Types,
-  ReturnDetails,
-  PokeCard,
-} from "./Details.styles";
+import * as C from "./Details.styles";
 import { GetPokemonById } from "../../store/actions/PokeAction";
 import pokeCard from "../../images/pokeBackGround.png";
 import arrow from "../../images/Arrow.svg";
@@ -48,8 +21,6 @@ function Details(pokemon: any) {
   const { idPoke } = useParams();
   const navigate = useNavigate();
 
-  
-
   const getPokemonSpecies = async (id: string | undefined) => {
     try {
       const response = await api.get(`pokemon-species/${id}`);
@@ -59,9 +30,6 @@ function Details(pokemon: any) {
       console.log(error);
     }
   };
-
-
-  
 
   useEffect(() => {
     GetPokemonById(dispatch, idPoke);
@@ -105,97 +73,96 @@ function Details(pokemon: any) {
         return str.toUpperCase();
     }
   };
-
   return (
     <>
-      <ContainerPai color={Background[activePokemon?.types[0]?.type?.name]}>
-        <ImgDiv>
-          <ArrowName>
-            <ReturnDetails onClick={() => navigate("/")}>
-              <ArrowImg src={arrow} alt="arrow" />
-              <NamePokemon color="white">
+      <C.ContainerPai color={Background[activePokemon?.types[0]?.type?.name]}>
+        <C.ImgDiv>
+          <C.ArrowName>
+            <C.ReturnDetails onClick={() => navigate("/")}>
+              <C.ArrowImg src={arrow} alt="arrow" />
+              <C.NamePokemon color="white">
                 {upperCaseLetter(activePokemon.name)}
-              </NamePokemon>
-            </ReturnDetails>
-          </ArrowName>
-          <NamePokemon>#{zeroLeft(activePokemon.id)}</NamePokemon>
-        </ImgDiv>
-        <PokemonStand data-aos="fade-up">
-          <PokeCard src={pokeCard} alt="" top="1px" />
-          <PokeCard src={pokeCard} alt="" right="1px" />
-          <PokeCard src={pokeCard} alt="" bottom="1px" />
-          <PokeCard src={pokeCard} alt="" right="1px" bottom="1px" />
-          <PokemonImg>
-            <ImgStand
+              </C.NamePokemon>
+            </C.ReturnDetails>
+          </C.ArrowName>
+          <C.NamePokemon>#{zeroLeft(activePokemon.id)}</C.NamePokemon>
+        </C.ImgDiv>
+        <C.PokemonStand data-aos="fade-up">
+          <C.PokeCard src={pokeCard} alt="" top="1px" />
+          <C.PokeCard src={pokeCard} alt="" right="1px" />
+          <C.PokeCard src={pokeCard} alt="" bottom="1px" />
+          <C.PokeCard src={pokeCard} alt="" right="1px" bottom="1px" />
+          <C.PokemonImg>
+            <C.ImgStand
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${activePokemon.id}.png`}
               alt="imagem pokemon"
               width={"250px"}
               height={"250px"}
             />
-          </PokemonImg>
-          <PokemonTypes>
+          </C.PokemonImg>
+          <C.PokemonTypes>
             {Object.keys(activePokemon.types).map((type: string) => (
-              <Types key={type} color={activePokemon.types[type].type.name}>
+              <C.Types key={type} color={activePokemon.types[type].type.name}>
                 {upperCaseLetter(activePokemon.types[type].type.name)}
-              </Types>
+              </C.Types>
             ))}
-          </PokemonTypes>
-          <PokemonInfo>
-            <TitleInfo mT="32px" color={activePokemon?.types[0]?.type?.name}>
+          </C.PokemonTypes>
+          <C.PokemonInfo>
+            <C.TitleInfo mT="32px" color={activePokemon?.types[0]?.type?.name}>
               About
-            </TitleInfo>
-          </PokemonInfo>
-          <InfosPoke>
-            <Info>
-              <PokemonInfos>
-                <InfoImg src={Weight} />
-                <InfoSpan> {weightLeft(activePokemon.weight)}</InfoSpan>
-              </PokemonInfos>
-              <TitleSpan>Weight</TitleSpan>
-            </Info>
-            <Info>
-              <PokemonInfos>
-                <InfoImg src={Height} /> {weightLeft(activePokemon.height)}
-              </PokemonInfos>
-              <TitleSpan>Height</TitleSpan>
-            </Info>
-            <Info>
-              <InfoAbilities>
+            </C.TitleInfo>
+          </C.PokemonInfo>
+          <C.InfosPoke>
+            <C.Info>
+              <C.PokemonInfos>
+                <C.InfoImg src={Weight} />
+                <C.InfoSpan> {weightLeft(activePokemon.weight)}</C.InfoSpan>
+              </C.PokemonInfos>
+              <C.TitleSpan>Weight</C.TitleSpan>
+            </C.Info>
+            <C.Info>
+              <C.PokemonInfos>
+                <C.InfoImg src={Height} /> {weightLeft(activePokemon.height)}
+              </C.PokemonInfos>
+              <C.TitleSpan>Height</C.TitleSpan>
+            </C.Info>
+            <C.Info>
+              <C.InfoAbilities>
                 {Object.keys(activePokemon.abilities).map((special: string) => (
-                  <AbilitySpan
+                  <C.AbilitySpan
                     key={special}
                     color={activePokemon.abilities[special].ability.name}
                   >
                     {upperCaseLetter(
                       activePokemon.abilities[special].ability.name
                     )}
-                  </AbilitySpan>
+                  </C.AbilitySpan>
                 ))}
-              </InfoAbilities>
-              <TitleSpan>Moves</TitleSpan>
-            </Info>
-          </InfosPoke>
-          <Description>
+              </C.InfoAbilities>
+              <C.TitleSpan>Moves</C.TitleSpan>
+            </C.Info>
+          </C.InfosPoke>
+          <C.Description>
             <p>{description}</p>
-          </Description>
-          <PokemonInfo>
-            <TitleInfo mT="10px" color={activePokemon?.types[0]?.type?.name}>
+          </C.Description>
+          <C.PokemonInfo>
+            <C.TitleInfo mT="10px" color={activePokemon?.types[0]?.type?.name}>
               BaseStats
-            </TitleInfo>
-          </PokemonInfo>
-          <StatsBar>
+            </C.TitleInfo>
+          </C.PokemonInfo>
+          <C.StatsBar>
             {Object.keys(activePokemon.stats).map((stat: string) => (
-              <Stats key={stat}>
-                <TitleInfo
+              <C.Stats key={stat}>
+                <C.TitleInfo
                   bR="1px solid #E0E0E0"
                   wT="60px"
                   color={activePokemon?.types[0]?.type?.name}
                 >
                   {abreviation(activePokemon.stats[stat].stat.name)}
-                </TitleInfo>
-                <InfoNumbers>
+                </C.TitleInfo>
+                <C.InfoNumbers>
                   {zeroLeft(activePokemon.stats[stat].base_stat)}
-                </InfoNumbers>
+                </C.InfoNumbers>
                 <div>
                   <ProgressBar
                     abilities={activePokemon.stats[stat].base_stat}
@@ -203,11 +170,11 @@ function Details(pokemon: any) {
                     bgColor={activePokemon?.types[0]?.type?.name}
                   />
                 </div>
-              </Stats>
+              </C.Stats>
             ))}
-          </StatsBar>
-        </PokemonStand>
-      </ContainerPai>
+          </C.StatsBar>
+        </C.PokemonStand>
+      </C.ContainerPai>
     </>
   );
 }

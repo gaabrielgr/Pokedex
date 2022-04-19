@@ -1,8 +1,9 @@
 import axios from "axios";
 import api from "../../api";
+import { PokemonDTO } from "../../model/PokemonDTO";
 
 export const GetPokemons = async (dispatch: any) => {
-  const idPokemons = (id: any) => `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const idPokemons = (id: number) => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
   const pokemonsArray = [];
   for (let i = 1; i <= 151; i++) {
@@ -10,7 +11,7 @@ export const GetPokemons = async (dispatch: any) => {
   }
   try {
     const pokemons = await Promise.all(
-      pokemonsArray.map(async (url: any) => {
+      pokemonsArray.map(async (url: string) => {
         const { data } = await axios.get(url);
         return data;
       })
@@ -38,23 +39,25 @@ export const getPokemonByType = async (
 ) => {
   try {
     const { data } = await api.get(`type/${type}`);
-    const pokemonsType = data.pokemon.map((pokemon: any) => pokemon.pokemon);
+    const pokemonsType = data.pokemon.map(
+      (pokemon: PokemonDTO) => pokemon.pokemon
+    );
 
     const namesPoke: any = [];
-    pokemons.map((name: any) => namesPoke.push(name.name));
+    pokemons.map((name: PokemonDTO) => namesPoke.push(name.name));
 
     const namesPokeClick: any = [];
 
-    pokemonsType.map((name: any) => namesPokeClick.push(name.name));
+    pokemonsType.map((name: PokemonDTO) => namesPokeClick.push(name.name));
     const listNamesPoke = namesPoke.concat(namesPokeClick);
 
-    const newLista = listNamesPoke.filter(function (elem: any, pos: any) {
+    const newLista = listNamesPoke.filter(function (elem: string, pos: string) {
       return listNamesPoke.indexOf(elem) !== pos;
     });
     const listMenuPoke: any = [];
     try {
       const menuPromisse = await Promise.all(
-        newLista.map(async (element: any) => {
+        newLista.map(async (element: string) => {
           const { data } = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${element}`
           );
@@ -76,14 +79,12 @@ export const getPokemonByType = async (
     console.log(error);
   }
 };
-export const GetPokemonsByType = async (
-  dispatch: any,
-  type: any,
-  navigate: any
-) => {
+export const GetPokemonsByType = async (dispatch: any, type: string) => {
   try {
     const { data } = await api.get(`type/${type}`);
-    const pokemonsArray = data.pokemon.map((pokemon: any) => pokemon.pokemon);
+    const pokemonsArray = data.pokemon.map(
+      (pokemon: PokemonDTO) => pokemon.pokemon
+    );
     const pokemons = await Promise.all(
       pokemonsArray.map(async (url: any) => {
         const { data } = await axios.get(url.url);
@@ -103,7 +104,7 @@ export const GetPokemonsByType = async (
   }
 };
 
-export const GetPokemonById = async (dispatch: any, id: any) => {
+export const GetPokemonById = async (dispatch: any, id: string | undefined) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   try {
     const response = await axios.get(url);
@@ -119,12 +120,7 @@ export const GetPokemonById = async (dispatch: any, id: any) => {
   }
 };
 
-export const GetPokemonByName = async (
-  dispatch: any,
-  inputValue: any,
-  listPokemon: any,
-  setName: any
-) => {
+export const GetPokemonByName = async (dispatch: any, inputValue: string) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${inputValue}`;
   try {
     const { data } = await axios.get(url);

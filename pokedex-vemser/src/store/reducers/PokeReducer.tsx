@@ -2,16 +2,12 @@ export const INITIAL_STATE = {
   pokemons: [],
   loading: true,
   error: false,
-
   typesPokemon: [],
-
   listTypesPokemon: [],
   loadingTypesPokemon: true,
-
   activePokemon: [],
   loadingActivePokemon: true,
-  errorActivePokemon: false
-
+  errorActivePokemon: false,
 };
 
 const pokeReducer = (state = INITIAL_STATE, action: any) => {

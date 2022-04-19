@@ -42,7 +42,7 @@ export const Card = styled.li<GlobalColorProps>`
   border: 2px solid;
   border-radius: 8px;
   border-color: ${(props) => props.color};
-  box-shadow: ${(props) => props.boxShadow};
+  box-shadow: 0px 0px 10px -1px ${(props) => props.boxShadow};
 `;
 export const BackgroundCardImg = styled.div`
   display: flex;
