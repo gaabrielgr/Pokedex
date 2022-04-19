@@ -6,6 +6,12 @@ import { connect } from "react-redux";
 import arrowTopPage from "../images/arrowTopScrollMed.png";
 import Loading from "../components/Loading";
 import {
+  ColorStandard,
+  zeroLeft,
+  topPage,
+  upperCaseLetter,
+} from "../utils/Utils";
+import {
   GetPokemonById,
   getPokemonByType,
   GetPokemons,
@@ -35,6 +41,9 @@ import {
   ButtonHome,
   SearchImg,
   ReturnHome,
+  Title,
+  Form,
+  ImgSearch,
 } from "./Home.styles";
 import searchImg from "../images/searchImg.png";
 import pokeCard from "../images/pokeBackGround.png";
@@ -44,8 +53,7 @@ import Error from "../components/error/Error";
 
 const Home = (pokemon: any) => {
   const [handleType, setHandleType] = useState(false);
-  const { pokemons, dispatch, typesPokemon, listTypesPokemon, pokemonsByPage } =
-    pokemon;
+  const { pokemons, dispatch, typesPokemon, listTypesPokemon } = pokemon;
   const { results } = typesPokemon;
   const navigate = useNavigate();
   const [handleInput, setHandleInput] = useState("");
@@ -96,16 +104,6 @@ const Home = (pokemon: any) => {
     }
   };
 
-  const upperCaseLetter = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-  const zeroLeft = (num: number) => {
-    return num < 10 ? `00${num}` : num < 100 ? `0${num}` : num;
-  };
-  function topPage() {
-    return window.scrollTo(0, 0);
-  }
-
   function listPokeMenu(action: any, type: any, pokemons: any) {
     getPokemonByType(action, type, pokemons);
     setTypeName(type);
@@ -119,25 +117,25 @@ const Home = (pokemon: any) => {
         <ContainerSearch>
           <ButtonHome onClick={() => setHandleType(false)}>
             <ReturnHome src={arrowHome} alt="" height={"24px"} width={"24px"} />
-            <h3>Home</h3>
+            <Title small>Home</Title>
           </ButtonHome>
-          <form onSubmit={findPokemon}>
+          <Form onSubmit={findPokemon}>
             <SearchPokemon
               type="text"
               placeholder="Search your pokemon..."
               onChange={(e) => setHandleInput(e.target.value)}
             />
-          </form>
+          </Form>
           <SearchImg src={searchImg} alt="" width={"20px"} height={"20px"} />
         </ContainerSearch>
         <UlMenuLateral>
           <ContainerTitleMenuLateral>
-            <h1>Menu Types Pokemons</h1>
+            <Title>Menu Types Pokemons </Title>
           </ContainerTitleMenuLateral>
 
           {filterArr(results).map((type: any) => (
             <LiMenuLateral key={type.name}>
-              <img src={gpsPoke} alt="" width={"16px"} height={"16px"} />
+              <ImgSearch src={gpsPoke} alt="" width={"16px"} height={"16px"} />
               <ItemMenu>
                 <ItemMenuLink
                   onClick={() => listPokeMenu(dispatch, type.name, pokemons)}
@@ -145,7 +143,6 @@ const Home = (pokemon: any) => {
                   {type.name}
                 </ItemMenuLink>
               </ItemMenu>
-              <img src="" alt="" />
             </LiMenuLateral>
           ))}
         </UlMenuLateral>
@@ -153,11 +150,11 @@ const Home = (pokemon: any) => {
       <ContainerCards>
         {handleType ? (
           <TitleType>
-            <h1>{typeName}</h1>
+            <Title>{typeName}</Title>
           </TitleType>
         ) : (
           <TitleType>
-            <h1>ALL Pokemons 1°Generation</h1>
+            <Title>ALL Pokemons 1°Generation</Title>
           </TitleType>
         )}
         {handleType
@@ -168,14 +165,14 @@ const Home = (pokemon: any) => {
                 key={poke.id}
               >
                 <Card
-                  bd={poke.types[0].type.name}
-                  color={poke.types[0].type.name}
+                  boxShadow={ColorStandard(poke.types[0].type.name)}
+                  color={ColorStandard(poke.types[0].type.name)}
                 >
                   <BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
                   </BackgroundCardImg>
                   <ContainerIdCard>
-                    <IdCard color={poke.types[0].type.name}>
+                    <IdCard color={ColorStandard(poke.types[0].type.name)}>
                       #{zeroLeft(poke.id)}
                     </IdCard>
                   </ContainerIdCard>
@@ -186,8 +183,10 @@ const Home = (pokemon: any) => {
                     />
                   </ContainerCardImg>
                   <ContainerNamePokemon>
-                    <ColorCard color={poke.types[0].type.name}>
-                      <TitleCard>{upperCaseLetter(poke.name)} </TitleCard>
+                    <ColorCard color={ColorStandard(poke.types[0].type.name)}>
+                      <TitleCard bg="#fff" size="20px" marginB="5px">
+                        {upperCaseLetter(poke.name)}{" "}
+                      </TitleCard>
                     </ColorCard>
                   </ContainerNamePokemon>
                 </Card>
@@ -200,14 +199,14 @@ const Home = (pokemon: any) => {
                 key={poke.id}
               >
                 <Card
-                  bd={poke.types[0].type.name}
-                  color={poke.types[0].type.name}
+                  boxShadow={ColorStandard(poke.types[0].type.name)}
+                  color={ColorStandard(poke.types[0].type.name)}
                 >
                   <BackgroundCardImg>
                     <img width={"400px"} src={pokeCard} alt="" />
                   </BackgroundCardImg>
                   <ContainerIdCard>
-                    <IdCard color={poke.types[0].type.name}>
+                    <IdCard color={ColorStandard(poke.types[0].type.name)}>
                       #{zeroLeft(poke.id)}
                     </IdCard>
                   </ContainerIdCard>
@@ -218,8 +217,10 @@ const Home = (pokemon: any) => {
                     />
                   </ContainerCardImg>
                   <ContainerNamePokemon>
-                    <ColorCard color={poke.types[0].type.name}>
-                      <TitleCard>{upperCaseLetter(poke.name)} </TitleCard>
+                    <ColorCard color={ColorStandard(poke.types[0].type.name)}>
+                      <TitleCard bg="#fff" size="20px" marginB="5px">
+                        {upperCaseLetter(poke.name)}{" "}
+                      </TitleCard>
                     </ColorCard>
                   </ContainerNamePokemon>
                 </Card>

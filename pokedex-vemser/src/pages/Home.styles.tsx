@@ -1,6 +1,15 @@
 import styled from "styled-components";
 import beforePoke from "../images/beforePoke.png";
-
+type GlobalColorProps = {
+  color?: string;
+  boxShadow?: string;
+};
+type TituloProps = {
+  small?: boolean;
+};
+export const Title = styled.h1<TituloProps>`
+  font-size: ${(props) => (props.small ? "18px" : "32px")};
+`;
 export const ContainerHome = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
@@ -24,7 +33,7 @@ export const TitleType = styled.div`
   grid-column-end: 4;
 `;
 
-export const Card = styled.li<{ bd: any }>`
+export const Card = styled.li<GlobalColorProps>`
   display: flex;
   background-color: #fff;
   flex-direction: column;
@@ -32,82 +41,8 @@ export const Card = styled.li<{ bd: any }>`
   height: 250px;
   border: 2px solid;
   border-radius: 8px;
-  border-color: ${(props: any) => {
-    switch (props.color) {
-      case "steel":
-        return "#B7B7CE";
-      case "fire":
-        return "#EE8130";
-      case "grass":
-        return "#7AC74C";
-      case "electric":
-        return "#F7D02C";
-      case "water":
-        return "#6390F0";
-      case "ice":
-        return "#96D9D6";
-      case "ground":
-        return "#E2BF65";
-      case "rock":
-        return "#B6A136";
-      case "fairy":
-        return "#D685AD ";
-      case "poison":
-        return "#A33EA1";
-      case "dragon":
-        return "#6F35FC";
-      case "psychic":
-        return "#F95587";
-      case "normal":
-        return "#A8A77A";
-      case "bug":
-        return "#A6B91A";
-      case "ghost":
-        return "#735797";
-      case "fighting":
-        return "#C22E28";
-      default:
-        return "white";
-    }
-  }};
-  box-shadow: 0px 0px 8px -1px ${(props: any) => {
-      switch (props.bd) {
-        case "steel":
-          return "#B7B7CE";
-        case "fire":
-          return "#EE8130";
-        case "grass":
-          return "#7AC74C";
-        case "electric":
-          return "#F7D02C";
-        case "water":
-          return "#6390F0";
-        case "ice":
-          return "#96D9D6";
-        case "ground":
-          return "#E2BF65";
-        case "rock":
-          return "#B6A136";
-        case "fairy":
-          return "#D685AD ";
-        case "poison":
-          return "#A33EA1";
-        case "dragon":
-          return "#6F35FC";
-        case "psychic":
-          return "#F95587";
-        case "normal":
-          return "#A8A77A";
-        case "bug":
-          return "#A6B91A";
-        case "ghost":
-          return "#735797";
-        case "fighting":
-          return "#C22E28";
-        default:
-          return "white";
-      }
-    }};
+  border-color: ${(props) => props.color};
+  box-shadow: ${(props) => props.boxShadow};
 `;
 export const BackgroundCardImg = styled.div`
   display: flex;
@@ -143,102 +78,35 @@ export const CardImg = styled.img`
   }
 `;
 
-export const ColorCard = styled.div`
+export const ColorCard = styled.div<GlobalColorProps>`
   width: 100%;
   display: flex;
   height: 40px;
   align-items: center;
   justify-content: center;
-  background-color: ${(props: any) => {
-    switch (props.color) {
-      case "steel":
-        return "#B7B7CE";
-      case "fire":
-        return "#EE8130";
-      case "grass":
-        return "#7AC74C";
-      case "electric":
-        return "#F7D02C";
-      case "water":
-        return "#6390F0";
-      case "ice":
-        return "#96D9D6";
-      case "ground":
-        return "#E2BF65";
-      case "rock":
-        return "#B6A136";
-      case "fairy":
-        return "#D685AD ";
-      case "poison":
-        return "#A33EA1";
-      case "dragon":
-        return "#6F35FC";
-      case "psychic":
-        return "#F95587";
-      case "normal":
-        return "#A8A77A";
-      case "bug":
-        return "#A6B91A";
-      case "ghost":
-        return "#735797";
-      case "fighting":
-        return "#C22E28";
-      default:
-        return "white";
-    }
-  }};
+  background-color: ${(props) => props.color};
 `;
-export const TitleCard = styled.h3`
-  color: #fff;
-  font-size: 20px;
-  margin-bottom: 5px;
+type TitleCardProps = {
+  bg?: string;
+  size?: string;
+  marginB?: string;
+  card?: boolean;
+};
+export const TitleCard = styled.h3<TitleCardProps>`
+  color: ${(props) => props.bg};
+  font-size: ${(props) => props.size};
+  margin-bottom: ${(props) => props.marginB};
 `;
 
 export const ContainerIdCard = styled.div`
   margin-right: 15px;
 `;
-export const IdCard = styled.p`
+
+export const IdCard = styled.p<GlobalColorProps>`
   padding-top: 10px;
   text-align: right;
   font-weight: bold;
-  color: ${(props: any) => {
-    switch (props.color) {
-      case "steel":
-        return "#B7B7CE";
-      case "fire":
-        return "#EE8130";
-      case "grass":
-        return "#7AC74C";
-      case "electric":
-        return "#F7D02C";
-      case "water":
-        return "#6390F0";
-      case "ice":
-        return "#96D9D6";
-      case "ground":
-        return "#E2BF65";
-      case "rock":
-        return "#B6A136";
-      case "fairy":
-        return "#D685AD ";
-      case "poison":
-        return "#A33EA1";
-      case "dragon":
-        return "#6F35FC";
-      case "psychic":
-        return "#F95587";
-      case "normal":
-        return "#A8A77A";
-      case "bug":
-        return "#A6B91A";
-      case "ghost":
-        return "#735797";
-      case "fighting":
-        return "#C22E28";
-      default:
-        return "white";
-    }
-  }};
+  color: ${(props) => props.color};
 `;
 
 export const ContainerNamePokemon = styled.div`
@@ -250,6 +118,9 @@ export const ContainerNamePokemon = styled.div`
   z-index: 99;
 `;
 /* MENU LATERAL */
+
+export const Form = styled.form``;
+export const ImgSearch = styled.img``;
 
 export const ContainerSearch = styled.div`
   border-right: 1px solid #fff;
