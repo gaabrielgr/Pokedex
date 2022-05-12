@@ -1,4 +1,6 @@
 import styled from "styled-components";
+
+
 export const ContainerPai = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,6 +10,13 @@ export const ContainerPai = styled.div`
   padding-top: 40px;
   height: 100vh;
   background-color: ${(props: any) => props.color};
+
+  @media(max-width: 1400px) {
+    height: auto;
+    padding-top: 190px;
+  
+   
+  }
 `;
 
 export const ImgDiv = styled.div`
@@ -43,6 +52,10 @@ export const PokemonStand = styled.div`
   margin: 5px auto;
   border-radius: 8px;
   position: relative;
+
+  @media (max-width: 1150px) {
+    width: 800px;
+  }
 `;
 export const PokeCard = styled.img<{
   right?: string;
